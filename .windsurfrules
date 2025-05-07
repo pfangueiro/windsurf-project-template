@@ -9,54 +9,71 @@ loader:
     - agent: 1-analyst
       instructions: agents/analyst.md
       knowledge:
-        - templates/project-brief.txt
+        - templates/project-brief.md
 
     - agent: 2-pm
       instructions: agents/pm-agent.md
       knowledge:
-        - templates/prd.txt
-        - templates/epicN.txt
-        - templates/pm-checklist.txt
-        - templates/ui-ux-spec.txt
-        - project-brief.txt
+        - templates/prd.md
+        - templates/epicN.md
+        - templates/pm-checklist.md
+        - templates/ui-ux-spec.md
+        - artifacts/briefs/project-brief.md
 
     - agent: 3-architect
       instructions: agents/architect-agent.md
       knowledge:
-        - templates/architect-checklist.txt
-        - templates/architecture-templates.txt
-        - architecture.md
-        - tech-stack.md
+        - templates/architect-checklist.md
+        - templates/architecture-templates.md
+        - artifacts/architecture/architecture.md
+        - artifacts/architecture/tech-stack.md
 
     - agent: 4-po-sm
       instructions: agents/sm-agent.md
       knowledge:
-        - templates/story-template.txt
-        - templates/po-checklist.txt
-        - templates/story-draft-checklist.txt
-        - prd.md
-        - epicN.md
-        - architecture.md
-        - api-reference.md
-        - data-models.md
-        - coding-standards.md
-        - environment-vars.md
-        - testing-strategy.md
-        - project-structure.md
-        - ui-ux-spec.md
+        - templates/story-template.md
+        - templates/po-checklist.md
+        - templates/story-draft-checklist.md
+        - artifacts/requirements/prd.md
+        - artifacts/requirements/epicN.md
+        - artifacts/architecture/architecture.md
+        - docs/api-reference.md
+        - docs/data-models.md
+        - docs/coding-standards.md
+        - docs/environment-vars.md
+        - docs/testing-strategy.md
+        - docs/project-structure.md
+        - docs/ui-ux-spec.md
 
     - agent: 5-dev
       instructions: agents/dev-agent.md
       knowledge:
-        - All above PRD + architecture + API + story files
+        - artifacts/requirements/prd.md
+        - artifacts/architecture/architecture.md
+        - docs/api-reference.md
+        - artifacts/stories/*
+        - docs/coding-standards.md
+        - docs/data-models.md
+        - docs/environment-vars.md
+        - docs/testing-strategy.md
 
     - agent: 6-docs
       instructions: agents/docs-agent.md
       knowledge:
-        - api-reference.md
-        - story-template.txt
-        - story-draft-checklist.txt
-        - ui-ux-spec.md
+        - docs/api-reference.md
+        - templates/story-template.md
+        - templates/story-draft-checklist.md
+        - docs/ui-ux-spec.md
+
+    - agent: 7-qa
+      instructions: agents/qa-agent.md
+      knowledge:
+        - docs/testing-strategy.md
+        - artifacts/requirements/prd.md
+        - artifacts/stories/*
+        - docs/api-reference.md
+        - templates/story-template.md
+        - docs/coding-standards.md
 
 # Project structure enforced by the loader
 filesystem:
@@ -69,7 +86,30 @@ filesystem:
     - ai/epics/
     - code/
     - logs/
+    - artifacts/
     - .windsurfrules
     - codebase_sync.sh
     - codebase_snapshot.md
     - code_links.md
+    - document-manifest.md
+
+# Development standards and practices
+coding_standards:
+  enforce_placeholder_editing: true
+  auto_linting: true
+  auto_formatting: true
+  testing_required_before_commit: true
+
+memory_bank_practices:
+  session_tagging: true
+  compact_summaries: true
+  always_link_code_to-decisions: true
+
+agile_sync:
+  daily_focus_update: true
+  story_tracking: true
+  sprint_end_review_trigger: true
+
+mcp_usage:
+  always_log_server_context: true
+  auto-switch-servers-on-failure: true
