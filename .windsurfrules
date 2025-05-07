@@ -1,0 +1,94 @@
+# ────────────────────────────────
+# File: local-rules.yaml or .windsurfrules (if you merge them)
+# ────────────────────────────────
+loader:
+  rules:
+    - global-rules.yaml
+    - local-rules.yaml
+  agents:
+    - agent: 1-analyst
+      instructions: agents/analyst.md
+      knowledge:
+        - templates/project-brief.md
+
+    - agent: 2-pm
+      instructions: agents/pm-agent.md
+      knowledge:
+        - templates/prd.md
+        - templates/epicN.md
+        - templates/pm-checklist.md
+        - templates/ui-ux-spec.md
+        - artifacts/briefs/project-brief.md
+
+    - agent: 3-architect
+      instructions: agents/architect-agent.md
+      knowledge:
+        - templates/architect-checklist.md
+        - templates/architecture-templates.md
+        - artifacts/architecture/architecture.md
+        - artifacts/architecture/tech-stack.md
+
+    - agent: 4-po-sm
+      instructions: agents/sm-agent.md
+      knowledge:
+        - templates/story-template.md
+        - templates/po-checklist.md
+        - templates/story-draft-checklist.md
+        - artifacts/requirements/prd.md
+        - artifacts/requirements/epicN.md
+        - artifacts/architecture/architecture.md
+        - docs/api-reference.md
+        - docs/data-models.md
+        - docs/coding-standards.md
+        - docs/environment-vars.md
+        - docs/testing-strategy.md
+        - docs/project-structure.md
+        - docs/ui-ux-spec.md
+
+    - agent: 5-dev
+      instructions: agents/dev-agent.md
+      knowledge:
+        - artifacts/requirements/prd.md
+        - artifacts/architecture/architecture.md
+        - docs/api-reference.md
+        - artifacts/stories/*
+        - docs/coding-standards.md
+        - docs/data-models.md
+        - docs/environment-vars.md
+        - docs/testing-strategy.md
+
+    - agent: 6-docs
+      instructions: agents/docs-agent.md
+      knowledge:
+        - docs/api-reference.md
+        - templates/story-template.md
+        - templates/story-draft-checklist.md
+        - docs/ui-ux-spec.md
+
+    - agent: 7-qa
+      instructions: agents/qa-agent.md
+      knowledge:
+        - docs/testing-strategy.md
+        - artifacts/requirements/prd.md
+        - artifacts/stories/*
+        - docs/api-reference.md
+        - templates/story-template.md
+        - docs/coding-standards.md
+
+# Project structure enforced by the loader
+filesystem:
+  enforce:
+    - templates/
+    - agents/
+    - memory-bank/
+    - docs/
+    - ai/stories/
+    - ai/epics/
+    - code/
+    - logs/
+    - artifacts/
+    - .windsurfrules
+    - codebase_sync.sh
+    - codebase_snapshot.md
+    - code_links.md
+    - document-manifest.md
