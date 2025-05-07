@@ -1,0 +1,75 @@
+# ────────────────────────────────
+# File: local-rules.yaml or .windsurfrules (if you merge them)
+# ────────────────────────────────
+loader:
+  rules:
+    - global-rules.yaml
+    - local-rules.yaml
+  agents:
+    - agent: 1-analyst
+      instructions: agents/analyst.md
+      knowledge:
+        - templates/project-brief.txt
+
+    - agent: 2-pm
+      instructions: agents/pm-agent.md
+      knowledge:
+        - templates/prd.txt
+        - templates/epicN.txt
+        - templates/pm-checklist.txt
+        - templates/ui-ux-spec.txt
+        - project-brief.txt
+
+    - agent: 3-architect
+      instructions: agents/architect-agent.md
+      knowledge:
+        - templates/architect-checklist.txt
+        - templates/architecture-templates.txt
+        - architecture.md
+        - tech-stack.md
+
+    - agent: 4-po-sm
+      instructions: agents/sm-agent.md
+      knowledge:
+        - templates/story-template.txt
+        - templates/po-checklist.txt
+        - templates/story-draft-checklist.txt
+        - prd.md
+        - epicN.md
+        - architecture.md
+        - api-reference.md
+        - data-models.md
+        - coding-standards.md
+        - environment-vars.md
+        - testing-strategy.md
+        - project-structure.md
+        - ui-ux-spec.md
+
+    - agent: 5-dev
+      instructions: agents/dev-agent.md
+      knowledge:
+        - All above PRD + architecture + API + story files
+
+    - agent: 6-docs
+      instructions: agents/docs-agent.md
+      knowledge:
+        - api-reference.md
+        - story-template.txt
+        - story-draft-checklist.txt
+        - ui-ux-spec.md
+
+# Project structure enforced by the loader
+filesystem:
+  enforce:
+    - templates/
+    - agents/
+    - memory-bank/
+    - docs/
+    - ai/stories/
+    - ai/epics/
+    - code/
+    - logs/
+    - .windsurfrules
+    - codebase_sync.sh
+    - codebase_snapshot.md
+    - code_links.md
