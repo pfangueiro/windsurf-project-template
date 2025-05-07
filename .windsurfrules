@@ -92,3 +92,24 @@ filesystem:
     - codebase_snapshot.md
     - code_links.md
     - document-manifest.md
+
+# Development standards and practices
+coding_standards:
+  enforce_placeholder_editing: true
+  auto_linting: true
+  auto_formatting: true
+  testing_required_before_commit: true
+
+memory_bank_practices:
+  session_tagging: true
+  compact_summaries: true
+  always_link_code_to-decisions: true
+
+agile_sync:
+  daily_focus_update: true
+  story_tracking: true
+  sprint_end_review_trigger: true
+
+mcp_usage:
+  always_log_server_context: true
+  auto-switch-servers-on-failure: true
