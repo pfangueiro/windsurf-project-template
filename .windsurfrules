@@ -1,5 +1,5 @@
 # ────────────────────────────────
-# File: .windsurfrules (Updated Version)
+# File: .windsurfrules (Updated Version with Requirement Review Workflow)
 # ────────────────────────────────
 loader:
   rules:
@@ -15,6 +15,8 @@ loader:
         - user requirements
         - business value
         - market analysis
+        - requirement change
+        - feature update
 
     - agent: PM
       instructions: agents/pm-agent.md
@@ -29,6 +31,8 @@ loader:
         - dependencies
         - resource allocation
         - risk management
+        - project impact
+        - schedule change
 
     - agent: Architect
       instructions: agents/architect-agent.md
@@ -42,6 +46,8 @@ loader:
         - design patterns
         - architecture impact
         - technical debt
+        - implementation change
+        - requirement impact
 
     - agent: PO
       instructions: agents/sm-agent.md
@@ -64,6 +70,8 @@ loader:
         - acceptance criteria
         - user stories
         - value proposition
+        - requirement review
+        - story adjustment
 
     - agent: ScrumMaster
       instructions: agents/sm-agent.md
@@ -77,6 +85,7 @@ loader:
         - impediment removal
         - team facilitation
         - process improvement
+        - workflow adjustment
 
     - agent: Developer
       instructions: agents/dev-agent.md
@@ -94,6 +103,7 @@ loader:
         - coding standards
         - technical constraints
         - refactoring needs
+        - code impact assessment
 
     - agent: Docs
       instructions: agents/docs-agent.md
@@ -107,6 +117,7 @@ loader:
         - api changes
         - user-facing content
         - technical documentation
+        - documentation update
 
     - agent: QA
       instructions: agents/qa-agent.md
@@ -122,6 +133,7 @@ loader:
         - test plans
         - quality risks
         - regression impacts
+        - test case update
 
 # Cross-functional teams
 teams:
@@ -144,6 +156,24 @@ teams:
   documentation:
     members: [Docs, Developer, PO]
     activities: [api documentation, user guides, technical documentation]
+    
+  # New team for requirement impact analysis
+  requirement_impact_analysis:
+    members: [BA, PO, Architect, QA]
+    activities: [impact assessment, plan adjustment, story refinement, documentation update]
+
+# Workflow triggers for specific actions
+workflow_triggers:
+  BA_triggers: ["@BA", "analyze requirement", "business analysis", "market need"]
+  Architect_triggers: ["@Architect", "architecture", "design pattern", "technical approach"]
+  PM_triggers: ["@PM", "timeline", "project plan", "resource need"]
+  PO_triggers: ["@PO", "product backlog", "feature priority", "user story"]
+  QA_triggers: ["@QA", "testing", "quality", "test plan", "verification"]
+  Developer_triggers: ["@Developer", "implementation", "code", "develop"]
+  Docs_triggers: ["@Docs", "documentation", "api docs", "user guide"]
+  
+  # New trigger for requirement review workflow
+  requirement_review_triggers: ["new requirement", "requirement change", "feature update", "@RequirementReview"]
 
 # Project structure enforced by the loader
 filesystem:
@@ -213,6 +243,22 @@ task_management:
     progress_update:
       format: "[YYYY-MM-DD HH:MM:SS] - [Task ID] - [Status] - [Description]"
       statuses: ["Started", "In Progress", "Blocked", "Completed", "Deferred"]
+  
+  # New workflow for requirement impact analysis
+  requirement_review_workflow:
+    trigger: "@RequirementReview"
+    steps:
+      - "Analyze new requirement against existing plan"
+      - "Identify affected epics and stories"
+      - "Assess architecture impact"
+      - "Update relevant documentation"
+      - "Adjust project timeline if necessary"
+      - "Report impact assessment summary"
+    outputs:
+      - "Updated epics and stories"
+      - "Architecture change recommendations"
+      - "Timeline adjustments"
+      - "Documentation updates"
 
 mcp_usage:
   always_log_server_context: true
