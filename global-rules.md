@@ -62,26 +62,54 @@ codebase_sync:
 
 roles_and_workflow:
   agents:
-    - 1-Analyst: analyst.md
-    - 2-PM: pm-agent.md
-    - 3-Architect: architect-agent.md
-    - 4-PO+SM: sm-agent.md
+    - BA: analyst.md
+    - PM: pm-agent.md
+    - Architect: architect-agent.md
+    - PO: sm-agent.md
+    - ScrumMaster: sm-agent.md
+    - Developer: dev-agent.md
+    - QA: qa-agent.md
+    - Docs: docs-agent.md
   execution_model:
     phases:
-      - Brainstorming
-      - Deep Research
-      - Project Brief
-      - PRD
-      - Architecture
-      - Epics
-      - Stories
-      - QA
+      - Business Analysis
+      - Architecture Design
+      - Sprint Planning
+      - Development
+      - Testing
+      - Documentation
+      - Deployment
+      - Maintenance
     pattern:
-      - "Build small, verify, iterate"
-      - "Test each module independently"
-      - "Retest full system after section completion"
-      - "Proactively flag gaps, clarify with user"
-      - "Collaborate to prevent LLM drift from goals"
+      - "Agile methodology with 2-week sprints"
+      - "Daily stand-ups"
+      - "Weekly sprint reviews"
+      - "Monthly retrospectives"
+      - "Continuous integration/continuous deployment"
+      - "Documentation-driven development"
+  collaboration_model:
+    auto_engagement:
+      - BA: ["feature description", "user requirements", "business value", "market analysis"]
+      - Architect: ["technical feasibility", "design patterns", "architecture impact", "technical debt"]
+      - PM: ["timelines", "dependencies", "resource allocation", "risk management"]
+      - PO: ["feature priority", "acceptance criteria", "user stories", "value proposition"]
+      - QA: ["testability", "test plans", "quality risks", "regression impacts"]
+      - Developer: ["implementation approach", "coding standards", "technical constraints", "refactoring needs"]
+      - Docs: ["documentation needs", "api changes", "user-facing content", "technical documentation"]
+    workflow_triggers:
+      BA_triggers: ["@BA", "analyze requirement", "business analysis", "market need"]
+      Architect_triggers: ["@Architect", "architecture", "design pattern", "technical approach"]
+      PM_triggers: ["@PM", "timeline", "project plan", "resource need"]
+      PO_triggers: ["@PO", "product backlog", "feature priority", "user story"]
+      QA_triggers: ["@QA", "testing", "quality", "test plan", "verification"]
+      Developer_triggers: ["@Developer", "implementation", "code", "develop"]
+      Docs_triggers: ["@Docs", "documentation", "api docs", "user guide"]
+    cross_functional_teams:
+      requirement_analysis: ["BA", "PO", "Architect"]
+      technical_planning: ["Architect", "Developer", "QA"]
+      implementation: ["Developer", "Architect", "QA"]
+      quality_assurance: ["QA", "Developer", "BA"]
+      documentation: ["Docs", "Developer", "PO"]
 
 status_prefix:
   general: "Begin EVERY response with either '[MEMORY BANK: ACTIVE]' or '[MEMORY BANK: INACTIVE]', according to the current state of the Memory Bank."
@@ -127,6 +155,42 @@ umb: # Update Memory Bank command
   post_umb_actions:
     - "State: Memory Bank fully synchronized based on current chat session."
     - "State: Session context preserved for continuation."
+
+task_management:
+  workflow:
+    creation:
+      - "Create task with clear scope, measurable goals and acceptance criteria"
+      - "Estimate task duration (aim for 2 hours max per task)"
+      - "Identify dependencies and prerequisites"
+      - "Assign to appropriate agent(s)"
+    execution:
+      - "Update activeContext.md with current task focus"
+      - "Follow defined process for implementation"
+      - "Document progress in real-time"
+      - "Report blockers immediately"
+    review:
+      - "Self-review by implementing agent"
+      - "Cross-review by another relevant agent"
+      - "Verify against acceptance criteria"
+    completion:
+      - "Document completion in progress.md"
+      - "Update any relevant documentation"
+      - "Capture decisions in decisionLog.md"
+      - "Update memory bank with UMB command"
+  documentation:
+    task_format:
+      - "Title: Clear, concise description"
+      - "Agent: Responsible agent(s)"
+      - "Deadline: Expected completion timeframe"
+      - "Dependencies: Related tasks or prerequisites"
+      - "Acceptance: Measurable criteria for completion"
+      - "Artifacts: Expected deliverables"
+    progress_update:
+      format: "[YYYY-MM-DD HH:MM:SS] - [Task ID] - [Status] - [Description]"
+      statuses: ["Started", "In Progress", "Blocked", "Completed", "Deferred"]
+  agent_utilization:
+    request_format: "@[agent_name] [task description or question]"
+    valid_agents: ["BA", "PM", "Architect", "PO", "ScrumMaster", "Developer", "QA", "Docs"]
 ```
 
 ## Implementation Notes
@@ -137,5 +201,7 @@ These global rules are automatically loaded by the Windsurf IDE and govern the b
 2. **Structured Workflow**: The agent-based approach provides specialized assistance for each phase of development.
 3. **Contextual Awareness**: The system tracks decisions, progress, and patterns throughout the project lifecycle.
 4. **Automated Updates**: The UMB command provides a mechanism for synchronizing the memory bank with the current session.
+5. **Task Management**: The system enforces a consistent approach to task creation, execution, review, and documentation.
+6. **Agent Utilization**: Agents can be directly requested using @[agent_name] syntax to perform specialized tasks.
 
 When using this project template with the Windsurf IDE, these rules will be automatically applied, ensuring a consistent and productive development experience.
