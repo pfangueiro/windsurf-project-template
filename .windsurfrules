@@ -1,17 +1,22 @@
 # ────────────────────────────────
-# File: local-rules.yaml or .windsurfrules (if you merge them)
+# File: .windsurfrules (Updated Version)
 # ────────────────────────────────
 loader:
   rules:
     - global-rules.yaml
     - local-rules.yaml
   agents:
-    - agent: 1-analyst
+    - agent: BA
       instructions: agents/analyst.md
       knowledge:
         - templates/project-brief.md
+      triggers:
+        - feature description
+        - user requirements
+        - business value
+        - market analysis
 
-    - agent: 2-pm
+    - agent: PM
       instructions: agents/pm-agent.md
       knowledge:
         - templates/prd.md
@@ -19,16 +24,26 @@ loader:
         - templates/pm-checklist.md
         - templates/ui-ux-spec.md
         - artifacts/briefs/project-brief.md
+      triggers:
+        - timelines
+        - dependencies
+        - resource allocation
+        - risk management
 
-    - agent: 3-architect
+    - agent: Architect
       instructions: agents/architect-agent.md
       knowledge:
         - templates/architect-checklist.md
         - templates/architecture-templates.md
         - artifacts/architecture/architecture.md
         - artifacts/architecture/tech-stack.md
+      triggers:
+        - technical feasibility
+        - design patterns
+        - architecture impact
+        - technical debt
 
-    - agent: 4-po-sm
+    - agent: PO
       instructions: agents/sm-agent.md
       knowledge:
         - templates/story-template.md
@@ -44,8 +59,26 @@ loader:
         - docs/testing-strategy.md
         - docs/project-structure.md
         - docs/ui-ux-spec.md
+      triggers:
+        - feature priority
+        - acceptance criteria
+        - user stories
+        - value proposition
 
-    - agent: 5-dev
+    - agent: ScrumMaster
+      instructions: agents/sm-agent.md
+      knowledge:
+        - templates/story-template.md
+        - templates/po-checklist.md
+        - templates/story-draft-checklist.md
+        - docs/project-structure.md
+      triggers:
+        - sprint planning
+        - impediment removal
+        - team facilitation
+        - process improvement
+
+    - agent: Developer
       instructions: agents/dev-agent.md
       knowledge:
         - artifacts/requirements/prd.md
@@ -56,16 +89,26 @@ loader:
         - docs/data-models.md
         - docs/environment-vars.md
         - docs/testing-strategy.md
+      triggers:
+        - implementation approach
+        - coding standards
+        - technical constraints
+        - refactoring needs
 
-    - agent: 6-docs
+    - agent: Docs
       instructions: agents/docs-agent.md
       knowledge:
         - docs/api-reference.md
         - templates/story-template.md
         - templates/story-draft-checklist.md
         - docs/ui-ux-spec.md
+      triggers:
+        - documentation needs
+        - api changes
+        - user-facing content
+        - technical documentation
 
-    - agent: 7-qa
+    - agent: QA
       instructions: agents/qa-agent.md
       knowledge:
         - docs/testing-strategy.md
@@ -74,6 +117,33 @@ loader:
         - docs/api-reference.md
         - templates/story-template.md
         - docs/coding-standards.md
+      triggers:
+        - testability
+        - test plans
+        - quality risks
+        - regression impacts
+
+# Cross-functional teams
+teams:
+  requirement_analysis:
+    members: [BA, PO, Architect]
+    activities: [feature analysis, requirements gathering, feasibility assessment]
+  
+  technical_planning:
+    members: [Architect, Developer, QA]
+    activities: [technical design, implementation planning, test strategy]
+  
+  implementation:
+    members: [Developer, Architect, QA]
+    activities: [code development, code review, unit testing]
+  
+  quality_assurance:
+    members: [QA, Developer, BA]
+    activities: [test execution, bug verification, acceptance testing]
+  
+  documentation:
+    members: [Docs, Developer, PO]
+    activities: [api documentation, user guides, technical documentation]
 
 # Project structure enforced by the loader
 filesystem:
@@ -109,6 +179,40 @@ agile_sync:
   daily_focus_update: true
   story_tracking: true
   sprint_end_review_trigger: true
+
+# Task management practices
+task_management:
+  workflow:
+    creation:
+      - "Create task with clear scope, measurable goals and acceptance criteria"
+      - "Estimate task duration (aim for 2 hours max per task)"
+      - "Identify dependencies and prerequisites"
+      - "Assign to appropriate agent(s)"
+    execution:
+      - "Update activeContext.md with current task focus"
+      - "Follow defined process for implementation"
+      - "Document progress in real-time"
+      - "Report blockers immediately"
+    review:
+      - "Self-review by implementing agent"
+      - "Cross-review by another relevant agent"
+      - "Verify against acceptance criteria"
+    completion:
+      - "Document completion in progress.md"
+      - "Update any relevant documentation"
+      - "Capture decisions in decisionLog.md"
+      - "Update memory bank with UMB command"
+  documentation:
+    task_format:
+      - "Title: Clear, concise description"
+      - "Agent: Responsible agent(s)"
+      - "Deadline: Expected completion timeframe"
+      - "Dependencies: Related tasks or prerequisites"
+      - "Acceptance: Measurable criteria for completion"
+      - "Artifacts: Expected deliverables"
+    progress_update:
+      format: "[YYYY-MM-DD HH:MM:SS] - [Task ID] - [Status] - [Description]"
+      statuses: ["Started", "In Progress", "Blocked", "Completed", "Deferred"]
 
 mcp_usage:
   always_log_server_context: true
