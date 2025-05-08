@@ -14,6 +14,9 @@ This repository provides a standardized project structure designed to work seaml
 - **Organized File Structure**: Clear conventions for document organization
 - **Version Control Integration**: Git-ready structure for collaborative development
 - **CI/CD Configuration**: Ready-to-use CI/CD pipeline templates
+- **Agent Collaboration Model**: Automatic agent engagement based on context
+- **Task Management Workflow**: Structured approach to task creation and tracking
+- **Cross-Functional Teams**: Pre-defined teams for different development phases
 
 ## Getting Started
 
@@ -29,51 +32,41 @@ This repository provides a standardized project structure designed to work seaml
 ├── memory-bank/              # Project memory and context tracking
 │   ├── activeContext.md      # Current session state and goals
 │   ├── productContext.md     # Project scope definition
-│   ├── progress.md           # Work status tracking
-│   ├── decisionLog.md        # Record of decisions
-│   └── systemPatterns.md     # Recurring patterns and standards
+│   ├── progress.md           # Task status and completion
+│   ├── decisionLog.md        # Technical and architectural decisions
+│   └── systemPatterns.md     # Design patterns and standards
 │
-├── templates/                # Templates for project artifacts
-│   ├── project-brief.md      # Project brief template
-│   ├── prd.md                # Product requirements document template
-│   ├── epicN.md              # Epic template
-│   ├── pm-checklist.md       # Project manager checklist
-│   ├── ui-ux-spec.md         # UI/UX specification template
+├── templates/                # Project templates
+│   ├── project-brief.md      # Project overview template
+│   ├── prd.md                # Product requirements template
+│   ├── architecture-templates.md # Architecture templates
 │   ├── story-template.md     # User story template
-│   ├── po-checklist.md       # Product owner checklist
-│   ├── story-draft-checklist.md # Story draft checklist
-│   ├── architect-checklist.md   # Architecture validation checklist
-│   └── architecture-templates.md # Architecture document template
+│   └── ... (other templates)
 │
-├── agents/                   # Agent role definitions
-│   ├── analyst.md            # Business analyst agent
-│   ├── pm-agent.md           # Project manager agent
-│   ├── architect-agent.md    # Solution architect agent
-│   ├── sm-agent.md           # Scrum master/product owner agent
+├── agents/                   # Agent definitions and instructions
+│   ├── analyst.md            # Business Analyst agent
+│   ├── pm-agent.md           # Project Manager agent
+│   ├── architect-agent.md    # Solution Architect agent
+│   ├── sm-agent.md           # Scrum Master / Product Owner agent
 │   ├── dev-agent.md          # Developer agent
-│   ├── docs-agent.md         # Documentation specialist agent
-│   ├── qa-agent.md           # Quality assurance agent
-│   └── instructions.md       # Agent instructions
+│   ├── docs-agent.md         # Documentation agent
+│   └── qa-agent.md           # Quality Assurance agent
 │
-├── docs/                     # Project documentation
-│   ├── architecture.md       # Architecture documentation
-│   ├── api-reference.md      # API reference
-│   ├── data-models.md        # Data models documentation
-│   ├── coding-standards.md   # Coding standards
-│   ├── environment-vars.md   # Environment variables documentation
-│   ├── testing-strategy.md   # Testing strategy
-│   ├── project-structure.md  # Project structure documentation
-│   └── ui-ux-spec.md         # UI/UX specifications
-│
-├── artifacts/                # Instantiated documents from templates
+├── artifacts/                # Instantiated documents
 │   ├── briefs/               # Project briefs
-│   ├── requirements/         # PRD and epics
+│   ├── requirements/         # Product requirements
 │   ├── architecture/         # Architecture documents
 │   └── stories/              # User stories
 │
-├── ai/                       # AI-generated artifacts
-│   ├── stories/              # Generated user stories
-│   └── epics/                # Generated epics
+├── docs/                     # Documentation
+│   ├── api-reference.md      # API reference
+│   ├── coding-standards.md   # Coding standards
+│   ├── testing-strategy.md   # Testing strategy
+│   └── ... (other docs)
+│
+├── ai/                       # AI-related files
+│   ├── stories/              # AI-generated stories
+│   └── epics/                # AI-generated epics
 │
 ├── code/                     # Source code
 │   └── ci-cd-config.yml      # CI/CD configuration template
@@ -88,13 +81,48 @@ This repository provides a standardized project structure designed to work seaml
 
 ## Agent Roles
 
-- **1-Analyst**: Gathers and analyzes business requirements
-- **2-PM**: Plans, executes, and monitors project activities
-- **3-Architect**: Designs the technical architecture
-- **4-PO/SM**: Manages product backlog and facilitates Agile processes
-- **5-Dev**: Implements features and writes code
-- **6-Docs**: Creates and maintains documentation
-- **7-QA**: Develops and executes test plans
+- **BA**: Business Analyst who gathers and analyzes business requirements
+- **PM**: Project Manager who plans, executes, and monitors project activities
+- **Architect**: Solution Architect who designs the technical architecture
+- **PO**: Product Owner who manages product backlog and prioritizes features
+- **ScrumMaster**: Facilitates Agile processes and removes impediments
+- **Developer**: Implements features and writes code
+- **Docs**: Creates and maintains documentation
+- **QA**: Develops and executes test plans
+
+## Agent Collaboration Model
+
+Agents automatically engage based on contextual triggers:
+
+```yaml
+auto_engagement:
+  - BA: ["feature description", "user requirements", "business value"]
+  - Architect: ["technical feasibility", "design patterns", "architecture impact"]
+  - PM: ["timelines", "dependencies", "resource allocation"]
+  # ... other agents and triggers
+```
+
+## Cross-Functional Teams
+
+Pre-defined teams for different development activities:
+
+```yaml
+teams:
+  requirement_analysis: ["BA", "PO", "Architect"]
+  technical_planning: ["Architect", "Developer", "QA"]
+  implementation: ["Developer", "Architect", "QA"]
+  quality_assurance: ["QA", "Developer", "BA"]
+  documentation: ["Docs", "Developer", "PO"]
+```
+
+## Task Management Workflow
+
+Structured approach to task management:
+
+1. **Creation**: Define scope, goals, acceptance criteria, dependencies
+2. **Execution**: Update context, document progress, report blockers
+3. **Review**: Self-review, cross-review, verification against criteria
+4. **Completion**: Document completion, update documentation, capture decisions
 
 ## Memory Bank System
 
@@ -112,6 +140,7 @@ The memory bank system maintains context across sessions through five core files
 2. The IDE will automatically detect the `.windsurfrules` file
 3. The memory bank will be initialized on first interaction
 4. Use the command "Update Memory Bank" or "UMB" to synchronize the memory bank with the current session
+5. Request agent assistance using `@[agent_name]` syntax (e.g., `@Architect explain the system design`)
 
 ## License
 
