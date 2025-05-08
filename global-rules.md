@@ -122,86 +122,146 @@ memory_bank_updates:
     format: "[YYYY-MM-DD HH:MM:SS] - [Summary of Decision]"
   productContext.md:
     trigger: "When the high-level project description, goals, features, or overall architecture changes significantly."
-    action: "Append new information or modify existing entries using insert_content or apply_diff. Append timestamp and summary as footnote."
-    format: "[YYYY-MM-DD HH:MM:SS] - [Summary of Change]"
-  systemPatterns.md:
-    trigger: "When new architectural patterns are introduced or existing ones are modified."
-    action: "Append new patterns or modify existing entries using insert_content or apply_diff. Include timestamp."
-    format: "[YYYY-MM-DD HH:MM:SS] - [Description of Pattern/Change]"
-  activeContext.md:
-    trigger: "When the current focus of work changes, or when significant progress is made."
-    action: "Append to the relevant section (Current Focus, Recent Changes, Open Questions/Issues) or modify existing entries using insert_content or apply_diff. Include timestamp."
-    format: "[YYYY-MM-DD HH:MM:SS] - [Summary of Change/Focus/Issue]"
+    action: "Update existing information or append new information as appropriate. Focus on keeping this document concise and up-to-date."
+    format: "Structured markdown with clear sections."
   progress.md:
-    trigger: "When a task begins, is completed, or its status changes."
-    action: "Append the new entry using insert_content. Never overwrite. Include timestamp."
-    format: "[YYYY-MM-DD HH:MM:SS] - [Summary of Progress Update]"
+    trigger: "When tasks are completed, new tasks are identified, or blockers are encountered."
+    action: "Update existing information or append new information as appropriate."
+    format: "Structured markdown with clear sections for completed, current, and next steps."
+  activeContext.md:
+    trigger: "At the beginning of each session and when focus shifts significantly."
+    action: "Begin with timestamp and current focus. Append new information as session progresses."
+    format: "[YYYY-MM-DD HH:MM] - [Current Focus]"
+  systemPatterns.md:
+    trigger: "When a new pattern or standard is established."
+    action: "Append new pattern or modify existing pattern as appropriate."
+    format: "Structured markdown with pattern name, description, example, and context."
 
-umb: # Update Memory Bank command
-  trigger: "^(Update Memory Bank|UMB)$"
-  instructions:
-    - "Halt Current Task: Stop current activity."
-    - "Acknowledge Command: Respond with '[MEMORY BANK: UPDATING]'."
-    - "Review Chat History: Analyze the complete current chat session."
-
-  core_update_process: |
-    1. Current Session Review: Analyze chat history for relevant decisions, context changes, progress updates, clarifications etc.
-    2. Comprehensive Updates: Update relevant memory bank files based on the review, following the rules defined in 'memory_bank_updates'.
-    3. Memory Bank Synchronization: Ensure consistency across updated files.
-
-  task_focus: "During UMB, focus ONLY on capturing information explicitly present in the *current chat session* (clarifications, decisions, progress). Do NOT summarize the entire project or perform actions outside this scope."
-  cross_mode_updates: "Capture relevant information from the chat session irrespective of conceptual 'modes' mentioned, adding it to the appropriate Memory Bank files."
-
-  post_umb_actions:
-    - "State: Memory Bank fully synchronized based on current chat session."
-    - "State: Session context preserved for continuation."
-
-task_management:
-  workflow:
-    creation:
-      - "Create task with clear scope, measurable goals and acceptance criteria"
-      - "Estimate task duration (aim for 2 hours max per task)"
-      - "Identify dependencies and prerequisites"
-      - "Assign to appropriate agent(s)"
-    execution:
-      - "Update activeContext.md with current task focus"
-      - "Follow defined process for implementation"
-      - "Document progress in real-time"
-      - "Report blockers immediately"
-    review:
-      - "Self-review by implementing agent"
-      - "Cross-review by another relevant agent"
-      - "Verify against acceptance criteria"
-    completion:
-      - "Document completion in progress.md"
-      - "Update any relevant documentation"
-      - "Capture decisions in decisionLog.md"
-      - "Update memory bank with UMB command"
-  documentation:
-    task_format:
-      - "Title: Clear, concise description"
-      - "Agent: Responsible agent(s)"
-      - "Deadline: Expected completion timeframe"
-      - "Dependencies: Related tasks or prerequisites"
-      - "Acceptance: Measurable criteria for completion"
-      - "Artifacts: Expected deliverables"
-    progress_update:
-      format: "[YYYY-MM-DD HH:MM:SS] - [Task ID] - [Status] - [Description]"
-      statuses: ["Started", "In Progress", "Blocked", "Completed", "Deferred"]
-  agent_utilization:
-    request_format: "@[agent_name] [task description or question]"
-    valid_agents: ["BA", "PM", "Architect", "PO", "ScrumMaster", "Developer", "QA", "Docs"]
+rules_and_workflows:
+  task_management:
+    workflow:
+      creation:
+        - "Create task with clear scope, measurable goals and acceptance criteria"
+        - "Estimate task duration (aim for 2 hours max per task)"
+        - "Identify dependencies and prerequisites"
+        - "Assign to appropriate agent(s)"
+      execution:
+        - "Update activeContext.md with current task focus"
+        - "Follow defined process for implementation"
+        - "Document progress in real-time"
+        - "Report blockers immediately"
+      review:
+        - "Self-review by implementing agent"
+        - "Cross-review by another relevant agent"
+        - "Verify against acceptance criteria"
+      completion:
+        - "Document completion in progress.md"
+        - "Update any relevant documentation"
+        - "Capture decisions in decisionLog.md"
+        - "Update memory bank with UMB command"
+    documentation:
+      task_format:
+        - "Title: Clear, concise description"
+        - "Agent: Responsible agent(s)"
+        - "Duration: Estimated hours"
+        - "Dependencies: Blockers or prerequisites"
+        - "Acceptance: Measurable criteria"
 ```
 
-## Implementation Notes
+## Requirement Review Workflow
 
-These global rules are automatically loaded by the Windsurf IDE and govern the behavior of the system. The rules ensure:
+### Overview
+The Requirement Review Workflow is a standardized process for evaluating the impact of new requirements on existing project plans, epics, stories, and architecture. This process ensures that all project artifacts remain synchronized when requirements change or are added.
 
-1. **Consistent Memory Management**: The memory bank system maintains context across sessions.
-2. **Structured Workflow**: The agent-based approach provides specialized assistance for each phase of development.
-3. **Contextual Awareness**: The system tracks decisions, progress, and patterns throughout the project lifecycle.
-4. **Automated Updates**: The UMB command provides a mechanism for synchronizing the memory bank with the current session.
-5. **Task Management**: The system enforces a consistent approach to task creation, execution, review, and documentation.
-6. **Agent Utilization**: Agents can be directly requested using @[agent_name] syntax to perform specialized tasks.
+### Trigger
+This workflow is triggered when:
+- A new requirement is proposed
+- An existing requirement is modified
+- A feature is updated or enhanced
+- The explicit `@RequirementReview` command is used
 
-When using this project template with the Windsurf IDE, these rules will be automatically applied, ensuring a consistent and productive development experience.
+### Participants
+The Requirement Impact Analysis team handles this workflow, consisting of:
+- Business Analyst (BA)
+- Product Owner (PO)
+- Architect
+- QA Engineer
+
+### Process Steps
+
+1. **Initial Analysis**
+   - BA analyzes new requirement for business impact
+   - PO evaluates feature priority and value proposition
+   - Architect assesses technical feasibility and architecture impact
+   - QA determines testing implications
+
+2. **Document Impact Assessment**
+   - Identify affected epics and stories
+   - Evaluate timeline implications
+   - Determine architectural changes needed
+   - Assess testing requirements
+
+3. **Update Project Artifacts**
+   - Modify affected epics with new acceptance criteria
+   - Update or create user stories
+   - Adjust architecture documentation if necessary
+   - Revise PRD to include new requirements
+
+4. **Timeline Adjustment**
+   - Evaluate impact on current sprint
+   - Update project timeline if necessary
+   - Reassess priorities
+   - Identify risks related to the changes
+
+5. **Documentation Updates**
+   - Update all affected documentation
+   - Record decisions in decisionLog.md
+   - Update activeContext.md with new focus
+   - Record changes in progress.md
+
+6. **Report Generation**
+   - Create a summary of all impacts
+   - Include all updated artifacts
+   - Provide recommended next steps
+   - Highlight any blockers or risks
+
+### Output Artifacts
+The process produces several updated artifacts:
+- Updated epics and user stories
+- Architecture change recommendations
+- Timeline adjustments
+- Documentation updates
+- Impact assessment report
+
+### Usage
+To trigger this workflow, simply use:
+```
+@RequirementReview [description of new requirement]
+```
+
+### Example
+```
+@RequirementReview Add weather API integration to improve solar production forecasting
+```
+
+This would trigger the full review process to assess how this requirement impacts existing plans, potentially updating Epic 4 (LLM Integration and Advanced Features), adding new user stories, and adjusting the architecture document to include the weather API component.
+
+## Implementation Guidelines
+
+1. **Brevity and Focus**
+   - Keep requirement descriptions clear and specific
+   - Focus on the new functionality, not implementation details
+
+2. **Complete Context**
+   - Provide sufficient context for proper assessment
+   - Include business justification when possible
+
+3. **Timing Considerations**
+   - Allow sufficient time for thorough analysis
+   - Consider sprint boundaries when introducing significant changes
+
+4. **Cross-Team Communication**
+   - Ensure all affected teams are aware of the requirement
+   - Facilitate discussion between teams if needed
+
+This standardized approach ensures that project plans remain cohesive and up-to-date as requirements evolve throughout the development process.
