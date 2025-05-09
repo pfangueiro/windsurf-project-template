@@ -1,5 +1,5 @@
 # ────────────────────────────────
-# File: .windsurfrules (Updated Version with Requirement Review Workflow)
+# File: .windsurfrules (Updated Version with Task Management and TDD Workflow)
 # ────────────────────────────────
 loader:
   rules:
@@ -17,6 +17,14 @@ loader:
         - market analysis
         - requirement change
         - feature update
+      task_permissions:
+        can_create:
+          - feature
+          - documentation
+        can_review:
+          - documentation
+          - user story
+          - acceptance criteria
 
     - agent: PM
       instructions: agents/pm-agent.md
@@ -33,6 +41,15 @@ loader:
         - risk management
         - project impact
         - schedule change
+      task_permissions:
+        can_create:
+          - epic
+          - story
+          - milestone
+        can_review:
+          - task dependencies
+          - timelines
+          - resource allocation
 
     - agent: Architect
       instructions: agents/architect-agent.md
@@ -48,6 +65,16 @@ loader:
         - technical debt
         - implementation change
         - requirement impact
+      task_permissions:
+        can_create:
+          - feature
+          - refactor
+          - architecture
+        can_review:
+          - feature
+          - refactor
+          - test
+          - technical implementation
 
     - agent: PO
       instructions: agents/sm-agent.md
@@ -72,6 +99,16 @@ loader:
         - value proposition
         - requirement review
         - story adjustment
+      task_permissions:
+        can_create:
+          - feature
+          - story
+          - documentation
+        can_review:
+          - feature
+          - documentation
+          - user value
+          - acceptance criteria
 
     - agent: ScrumMaster
       instructions: agents/sm-agent.md
@@ -86,6 +123,15 @@ loader:
         - team facilitation
         - process improvement
         - workflow adjustment
+      task_permissions:
+        can_create: []
+        can_review:
+          - feature
+          - bug
+          - documentation
+          - refactor
+          - test
+          - process
 
     - agent: Developer
       instructions: agents/dev-agent.md
@@ -104,6 +150,18 @@ loader:
         - technical constraints
         - refactoring needs
         - code impact assessment
+      task_permissions:
+        can_create:
+          - feature
+          - bug
+          - refactor
+          - test
+        can_review:
+          - feature
+          - bug
+          - refactor
+          - test
+          - code
 
     - agent: Docs
       instructions: agents/docs-agent.md
@@ -118,6 +176,13 @@ loader:
         - user-facing content
         - technical documentation
         - documentation update
+      task_permissions:
+        can_create:
+          - documentation
+        can_review:
+          - documentation
+          - api docs
+          - user guides
 
     - agent: QA
       instructions: agents/qa-agent.md
@@ -134,6 +199,15 @@ loader:
         - quality risks
         - regression impacts
         - test case update
+      task_permissions:
+        can_create:
+          - bug
+          - test
+        can_review:
+          - feature
+          - bug
+          - test
+          - quality
 
 # Cross-functional teams
 teams:
@@ -157,10 +231,15 @@ teams:
     members: [Docs, Developer, PO]
     activities: [api documentation, user guides, technical documentation]
     
-  # New team for requirement impact analysis
+  # Team for requirement impact analysis
   requirement_impact_analysis:
     members: [BA, PO, Architect, QA]
     activities: [impact assessment, plan adjustment, story refinement, documentation update]
+    
+  # New team for test-driven development
+  test_driven_development:
+    members: [Developer, QA, Architect]
+    activities: [test definition, test implementation, test execution, code implementation]
 
 # Workflow triggers for specific actions
 workflow_triggers:
@@ -172,13 +251,22 @@ workflow_triggers:
   Developer_triggers: ["@Developer", "implementation", "code", "develop"]
   Docs_triggers: ["@Docs", "documentation", "api docs", "user guide"]
   
-  # New trigger for requirement review workflow
+  # Trigger for requirement review workflow
   requirement_review_triggers: ["new requirement", "requirement change", "feature update", "@RequirementReview"]
+  
+  # New triggers for task management and TDD workflow
+  task_management_triggers: ["@CreateTask", "new task", "create task", "add task"]
+  task_update_triggers: ["@UpdateTask", "update task", "change task", "task status"]
+  test_creation_triggers: ["@CreateTest", "new test", "create test", "add test"]
+  test_execution_triggers: ["@RunTests", "run tests", "execute tests", "test task"]
+  report_generation_triggers: ["@GenerateReport", "create report", "task report", "progress report"]
 
 # Project structure enforced by the loader
 filesystem:
   enforce:
     - templates/
+    - templates/task-templates/
+    - templates/report-templates/
     - agents/
     - memory-bank/
     - docs/
@@ -187,6 +275,18 @@ filesystem:
     - code/
     - logs/
     - artifacts/
+    - tasks/
+    - tasks/active/
+    - tasks/completed/
+    - tasks/templates/
+    - tests/
+    - tests/unit/
+    - tests/integration/
+    - tests/acceptance/
+    - reports/
+    - reports/task-completion/
+    - reports/story-completion/
+    - reports/epic-completion/
     - .windsurfrules
     - codebase_sync.sh
     - codebase_snapshot.md
@@ -203,12 +303,59 @@ coding_standards:
 memory_bank_practices:
   session_tagging: true
   compact_summaries: true
-  always_link_code_to-decisions: true
+  always_link_code_to_decisions: true
+  track_task_status: true
+  link_tasks_to_tests: true
 
 agile_sync:
   daily_focus_update: true
   story_tracking: true
   sprint_end_review_trigger: true
+  task_progress_tracking: true
+  test_coverage_reporting: true
+
+# Task management system
+task_management_system:
+  enabled: true
+  storage:
+    directory: tasks/
+    structure:
+      - active/
+      - completed/
+      - templates/
+  
+  task_types:
+    - feature
+    - bug
+    - documentation
+    - refactor
+    - test
+    - story
+    - epic
+  
+  status_values:
+    - to_do
+    - in_progress
+    - testing
+    - done
+  
+  priority_values:
+    - low
+    - medium
+    - high
+    - critical
+  
+  auto_creation:
+    from_agent_input: true
+    from_requirements: true
+    test_tasks_with_features: true
+  
+  templates:
+    feature_task: templates/task-templates/feature-task.yaml
+    bug_task: templates/task-templates/bug-task.yaml
+    test_task: templates/task-templates/test-task.yaml
+    story_task: templates/task-templates/story-task.yaml
+    epic_task: templates/task-templates/epic-task.yaml
 
 # Task management practices
 task_management:
@@ -218,33 +365,78 @@ task_management:
       - "Estimate task duration (aim for 2 hours max per task)"
       - "Identify dependencies and prerequisites"
       - "Assign to appropriate agent(s)"
+      - "Generate unique task ID in format TASK-[number]"
+      - "Automatically create test tasks for feature tasks"
     execution:
       - "Update activeContext.md with current task focus"
       - "Follow defined process for implementation"
       - "Document progress in real-time"
       - "Report blockers immediately"
+      - "Update task status as work progresses"
     review:
       - "Self-review by implementing agent"
       - "Cross-review by another relevant agent"
       - "Verify against acceptance criteria"
+      - "Execute all related tests and verify they pass"
     completion:
       - "Document completion in progress.md"
       - "Update any relevant documentation"
       - "Capture decisions in decisionLog.md"
       - "Update memory bank with UMB command"
+      - "Automatically update status of dependent tasks"
+      - "Generate completion report"
   documentation:
     task_format:
+      - "ID: Unique identifier (TASK-[number])"
       - "Title: Clear, concise description"
       - "Agent: Responsible agent(s)"
       - "Deadline: Expected completion timeframe"
       - "Dependencies: Related tasks or prerequisites"
       - "Acceptance: Measurable criteria for completion"
+      - "Status: to_do, in_progress, testing, done"
+      - "Related Tests: List of test IDs"
+      - "Related Story: Story ID"
+      - "Related Epic: Epic ID"
       - "Artifacts: Expected deliverables"
     progress_update:
       format: "[YYYY-MM-DD HH:MM:SS] - [Task ID] - [Status] - [Description]"
       statuses: ["Started", "In Progress", "Blocked", "Completed", "Deferred"]
   
-  # New workflow for requirement impact analysis
+  # Test-driven development workflow
+  test_driven_workflow:
+    enabled: true
+    enforce_test_first: true
+    storage:
+      directory: tests/
+      structure:
+        - unit/
+        - integration/
+        - acceptance/
+    
+    test_types:
+      - unit
+      - integration
+      - system
+      - acceptance
+    
+    status_values:
+      - to_do
+      - in_progress
+      - failed
+      - passed
+    
+    requirements:
+      coverage_minimum: 80
+      all_tests_pass: true
+      review_required: true
+    
+    progression_rules:
+      task_completion_requires_tests: true
+      story_completion_requires_all_tasks: true
+      epic_completion_requires_all_stories: true
+      test_documentation_required: true
+  
+  # Requirement review workflow
   requirement_review_workflow:
     trigger: "@RequirementReview"
     steps:
@@ -253,12 +445,16 @@ task_management:
       - "Assess architecture impact"
       - "Update relevant documentation"
       - "Adjust project timeline if necessary"
+      - "Create or update tasks based on requirement changes"
+      - "Update test requirements"
       - "Report impact assessment summary"
     outputs:
       - "Updated epics and stories"
       - "Architecture change recommendations"
       - "Timeline adjustments"
       - "Documentation updates"
+      - "New or updated tasks"
+      - "New or updated tests"
 
 mcp_usage:
   always_log_server_context: true
