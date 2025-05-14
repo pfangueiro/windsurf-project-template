@@ -1,0 +1,38 @@
+# ────────────────────────────────
+# Feature Task Template
+# ────────────────────────────────
+id: TASK-{number}
+title: "{feature_name}"
+type: feature
+agent: Developer
+priority: medium
+status: to_do
+estimated_hours: 2
+deadline: "{deadline}"
+acceptance_criteria:
+  - "{criterion_1}"
+  - "{criterion_2}"
+  - "{criterion_3}"
+dependencies:
+  - "{dependency_task_id}"
+related:
+  story: "STORY-{story_number}"
+  epic: "EPIC-{epic_number}"
+  tests:
+    - "TEST-{test_number}"
+description: |
+  Implement the {feature_name} feature that will allow users to {feature_purpose}.
+  
+  This task includes:
+  - {implementation_step_1}
+  - {implementation_step_2}
+  - {implementation_step_3}
+  
+  Technical details:
+  - {technical_detail_1}
+  - {technical_detail_2}
+
+artifacts:
+  - "{code_file_path}"
+  - "{test_file_path}"
+  - "{documentation_update}"

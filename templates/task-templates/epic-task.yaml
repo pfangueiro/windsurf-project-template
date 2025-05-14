@@ -1,0 +1,52 @@
+# ────────────────────────────────
+# Epic Task Template
+# ────────────────────────────────
+id: EPIC-{number}
+title: "{epic_name}"
+type: epic
+agent: PM
+priority: high
+status: to_do
+estimated_story_points: {points}
+target_milestone: "{milestone}"
+deadline: "{deadline}"
+acceptance_criteria:
+  - "{criterion_1}"
+  - "{criterion_2}"
+  - "{criterion_3}"
+dependencies:
+  - "{dependency_epic_id}"
+related:
+  stories:
+    - "STORY-{story_number_1}"
+    - "STORY-{story_number_2}"
+    - "STORY-{story_number_3}"
+description: |
+  This epic covers {epic_scope} functionality.
+  
+  Business goals:
+  - {business_goal_1}
+  - {business_goal_2}
+  
+  Technical objectives:
+  - {technical_objective_1}
+  - {technical_objective_2}
+  
+  Implementation strategy:
+  {implementation_strategy}
+
+stakeholders:
+  - "{stakeholder_1}"
+  - "{stakeholder_2}"
+timeline:
+  planning: "{planning_date}"
+  development: "{development_date_range}"
+  review: "{review_date}"
+  release: "{release_date}"
+risks:
+  - "{risk_1}"
+  - "{risk_2}"
+artifacts:
+  - "{epic_document}"
+  - "{architecture_diagram}"
+  - "{roadmap_update}"

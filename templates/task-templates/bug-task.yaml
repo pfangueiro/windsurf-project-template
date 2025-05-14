@@ -1,0 +1,49 @@
+# ────────────────────────────────
+# Bug Task Template
+# ────────────────────────────────
+id: TASK-{number}
+title: "Fix: {bug_title}"
+type: bug
+agent: Developer
+priority: high
+status: to_do
+estimated_hours: 1
+deadline: "{deadline}"
+acceptance_criteria:
+  - "Bug no longer reproducible under the documented conditions"
+  - "All existing tests pass"
+  - "New test added to prevent regression"
+  - "{additional_criterion}"
+dependencies:
+  - "{dependency_task_id}"
+related:
+  story: "STORY-{story_number}"
+  epic: "EPIC-{epic_number}"
+  tests:
+    - "TEST-{test_number}"
+description: |
+  Fix the issue where {bug_description}.
+  
+  Steps to reproduce:
+  1. {step_1}
+  2. {step_2}
+  3. {step_3}
+  
+  Expected behavior:
+  {expected_behavior}
+  
+  Current behavior:
+  {current_behavior}
+  
+  Possible causes:
+  - {possible_cause_1}
+  - {possible_cause_2}
+
+severity: "{critical|high|medium|low}"
+reported_by: "{reporter}"
+affected_components:
+  - "{component_1}"
+  - "{component_2}"
+artifacts:
+  - "{code_file_path}"
+  - "{test_file_path}"

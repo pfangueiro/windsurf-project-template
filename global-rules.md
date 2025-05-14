@@ -126,16 +126,24 @@ memory_bank_updates:
     format: "Structured markdown with clear sections."
   progress.md:
     trigger: "When tasks are completed, new tasks are identified, or blockers are encountered."
-    action: "Update existing information or append new information as appropriate."
-    format: "Structured markdown with clear sections for completed, current, and next steps."
+    action: "Update existing information or append new information as appropriate. Automatically update task status."
+    format: "Structured markdown with clear sections for completed, current, and next steps. Include task IDs and status."
   activeContext.md:
     trigger: "At the beginning of each session and when focus shifts significantly."
-    action: "Begin with timestamp and current focus. Append new information as session progresses."
-    format: "[YYYY-MM-DD HH:MM] - [Current Focus]"
+    action: "Begin with timestamp and current focus. Append new information as session progresses. Update with current task focus."
+    format: "[YYYY-MM-DD HH:MM] - [Current Focus] - [Active Task ID]"
   systemPatterns.md:
     trigger: "When a new pattern or standard is established."
     action: "Append new pattern or modify existing pattern as appropriate."
     format: "Structured markdown with pattern name, description, example, and context."
+  tasks:
+    trigger: "When agent proposes a task, when project goals are defined, or when a new requirement is identified."
+    action: "Create new task with appropriate metadata, assign to agent, update dependencies."
+    format: "YAML task definition with ID, title, description, status, and related metadata."
+  tests:
+    trigger: "When a new feature task is created or when test requirements change."
+    action: "Create corresponding test tasks, link to feature tasks, define acceptance criteria."
+    format: "YAML test definition with ID, title, type, related task, and status."
 
 rules_and_workflows:
   task_management:
@@ -145,27 +153,60 @@ rules_and_workflows:
         - "Estimate task duration (aim for 2 hours max per task)"
         - "Identify dependencies and prerequisites"
         - "Assign to appropriate agent(s)"
+        - "Generate unique task ID in format TASK-[number]"
+        - "Automatically create test tasks for feature tasks"
       execution:
         - "Update activeContext.md with current task focus"
         - "Follow defined process for implementation"
         - "Document progress in real-time"
         - "Report blockers immediately"
+        - "Update task status as work progresses"
       review:
         - "Self-review by implementing agent"
         - "Cross-review by another relevant agent"
         - "Verify against acceptance criteria"
+        - "Execute all related tests and verify they pass"
       completion:
         - "Document completion in progress.md"
         - "Update any relevant documentation"
         - "Capture decisions in decisionLog.md"
         - "Update memory bank with UMB command"
+        - "Automatically update status of dependent tasks"
+        - "Generate completion report"
     documentation:
       task_format:
+        - "ID: Unique identifier (TASK-[number])"
         - "Title: Clear, concise description"
         - "Agent: Responsible agent(s)"
         - "Duration: Estimated hours"
         - "Dependencies: Blockers or prerequisites"
         - "Acceptance: Measurable criteria"
+        - "Status: to_do, in_progress, testing, done"
+        - "Related Tests: List of test IDs"
+        - "Related Story: Story ID"
+        - "Related Epic: Epic ID"
+    test_driven_development:
+      workflow:
+        - "Create test tasks before or alongside feature tasks"
+        - "Define test requirements and acceptance criteria"
+        - "Implement tests before or alongside feature code"
+        - "Execute tests frequently during development"
+        - "All tests must pass before task completion"
+        - "Update test coverage metrics"
+      test_format:
+        - "ID: Unique identifier (TEST-[number])"
+        - "Title: Clear description of what is being tested"
+        - "Type: unit, integration, system, acceptance"
+        - "Related Task: Feature task ID"
+        - "Status: to_do, in_progress, failed, passed"
+        - "Automated: true/false"
+        - "Coverage Target: Percentage"
+      progression_rules:
+        - "Feature tasks cannot be marked done until all related tests pass"
+        - "Stories cannot be marked complete until all tasks are done"
+        - "Epics cannot be marked complete until all stories are done"
+        - "New tasks in a story cannot start until current tasks are tested"
+        - "Test results must be documented in progress.md"
 ```
 
 ## Requirement Review Workflow
