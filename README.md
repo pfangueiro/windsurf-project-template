@@ -1,10 +1,75 @@
 # Windsurf Project Template
 
-A comprehensive project structure template for AI-assisted software development using the Windsurf framework. Featuring an advanced trigger system for natural language agent activation and intelligent context management.
+A minimal, robust, and extensible template for AI-assisted software development using the Windsurf IDE. This template leverages a hierarchical memory bank system and advanced rules to streamline human+AI collaboration, ensure traceable and auditable decision-making, and enforce best practices throughout the project lifecycle.
 
-## Overview
+## Project Intention & Purpose
 
-This repository provides a standardized project structure designed to work seamlessly with the Windsurf IDE and AI agents. It establishes a robust memory bank system, specialized agent roles, and structured workflows that enable efficient collaboration between humans and AI throughout the software development lifecycle.
+- **Persist project context** across sessions and contributors
+- **Enable traceable, explainable decision-making** via memory bank updates
+- **Support agent-based workflows** with clear boundaries and triggers
+- **Ensure security, best practices, and auditability** in all project operations
+
+## Core Functionalities
+
+### Hierarchical Memory Bank System
+- Six core files persist context, decisions, and progress
+- Enables audit trails and reverse traceability from code to requirements
+
+### Rules & Workflows
+- Initialization, session handling, and periodic validation
+- Memory bank commands: UMB (Update), SMB (Summarize), CMB (Check)
+
+### MCP Server Integration
+- All operations (git, testing, DB, docs) use mapped MCP servers
+- Only explicitly allowed commands for each server
+
+### Agent & Trigger System
+- Specialized agents (BA, PM, Architect, PO, SM, Dev, QA, Docs)
+- Natural language and direct command triggers
+- Priority-based response and structured task lifecycle
+
+### Security & Best Practices
+- Session tagging, compact summaries, traceability
+- Coding standards, references, and audit trails
+
+## Triggers & Example Usage
+
+- "How should we prioritize the upcoming features?" → Triggers Product Owner agent
+- "What testing approach should we use for the payment system?" → Triggers QA agent
+- `UMB` to update the memory bank
+- `SMB` to summarize memory bank state
+- `CMB` to check memory bank integrity
+
+## How the System Works
+
+1. On project open/session start: Loads and validates memory bank, records session start
+2. During work: Logs decisions and progress, triggers agents by language or command, enforces MCP usage
+3. On session end: Summarizes accomplishments, updates progress and context
+
+## Summary Table
+
+| Feature                  | Description                                                                 |
+|--------------------------|-----------------------------------------------------------------------------|
+| Hierarchical Memory Bank | Persistent, traceable project context and decision log                      |
+| MCP Server Integration   | Secure, auditable operations via mapped MCP servers                         |
+| Agent/Trigger System     | Natural language and direct command triggers for specialized agents          |
+| Task Management          | Structured, traceable task and test lifecycle                               |
+| Session Handling         | Context tagging, summaries, and periodic validation                         |
+| Security/Best Practices  | Command boundaries, coding standards, and audit trails                      |
+
+## How to Use
+
+1. **Clone the repository** and open in Windsurf IDE.
+2. **Follow README and GITHUB_SETUP.md** for initialization.
+3. **Use natural language or direct commands** to interact with agents and memory bank.
+4. **Let the system guide you**—it will prompt for missing context, validate structure, and enforce best practices.
+
+## Why This Template?
+
+- **Minimal and extensible:** Start with just the memory bank, add features as needed.
+- **Traceable:** Every decision, code change, and context update is linked and auditable.
+- **AI-ready:** Designed for seamless human+AI collaboration, with clear boundaries and workflows.
+- **Secure and robust:** Only explicitly allowed operations and commands are permitted.
 
 ## Key Features
 
