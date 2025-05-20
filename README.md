@@ -12,12 +12,22 @@ A minimal, robust, and extensible template for AI-assisted software development 
 ## Core Functionalities
 
 ### Hierarchical Memory Bank System
+- Three-layer memory structure (working, short-term, long-term)
 - Six core files persist context, decisions, and progress
 - Enables audit trails and reverse traceability from code to requirements
 
-### Rules & Workflows
+### Smart Workflows System
+- **Memory Structure**: Three-layer approach for optimal context management
+- **Task Lifecycle**: Structured events for workflow tracking and automation
+- **Error Handling**: Framework for detection, logging, and recovery
+- **Memory Consistency**: Verification system for memory bank reliability
+- **Session Intelligence**: Advanced session management with context awareness
+- **Smart MCP Integration**: Unified framework connecting all workflows
+
+### Rules & Commands
 - Initialization, session handling, and periodic validation
 - Memory bank commands: UMB (Update), SMB (Summarize), CMB (Check)
+- Natural language triggers for all major workflows
 
 ### MCP Server Integration
 - All operations (git, testing, DB, docs) use mapped MCP servers
@@ -32,19 +42,57 @@ A minimal, robust, and extensible template for AI-assisted software development 
 - Session tagging, compact summaries, traceability
 - Coding standards, references, and audit trails
 
-## Triggers & Example Usage
+## Workflow Triggers & Example Usage
 
-- "How should we prioritize the upcoming features?" → Triggers Product Owner agent
-- "What testing approach should we use for the payment system?" → Triggers QA agent
+### Natural Language Triggers
+- "update memory with [topic]" → Updates memory bank with specified topic
+- "what's our current focus" → Retrieves context from activeContext.md
+- "how does [component] work" → Retrieves information from systemPatterns.md
+- "summarize current project" → Generates memory bank summary
+- "check memory bank health" → Verifies memory integrity
+
+### Task Lifecycle Commands
+- "start task implementing authentication" → Initializes task tracking
+- "update progress on authentication" → Records task progress
+- "complete task authentication" → Finalizes task and updates memory
+
+### Traditional Commands
 - `UMB` to update the memory bank
 - `SMB` to summarize memory bank state
 - `CMB` to check memory bank integrity
 
+### Workflow Slash Commands
+- `/memory-structure` → Access the three-layer memory structure workflow
+- `/task-lifecycle` → Access the task lifecycle events workflow
+- `/error-handling` → Access the error handling framework workflow
+- `/memory-consistency` → Access the memory consistency verification workflow
+- `/session-intelligence` → Access the session intelligence workflow
+- `/smart-mcp-integration` → Access the integration framework workflow
+
 ## How the System Works
 
-1. On project open/session start: Loads and validates memory bank, records session start
-2. During work: Logs decisions and progress, triggers agents by language or command, enforces MCP usage
-3. On session end: Summarizes accomplishments, updates progress and context
+1. **Project Initialization**
+   - Checks for memory bank directory structure
+   - Creates core files if they don't exist
+   - Sets up three-layer memory structure
+
+2. **Session Start**
+   - Progressive context loading based on relevance
+   - Verifies memory consistency and integrity
+   - Identifies active tasks and continuation points
+   - Prepares appropriate MCP tools based on context
+
+3. **Task Execution**
+   - Smart MCP capability selection based on task context
+   - Structured error handling with automatic recovery
+   - Real-time progress tracking and focus monitoring
+   - Adaptive tool selection as task context evolves
+
+4. **Session End**
+   - Automatically generates session summary
+   - Updates all memory layers based on accomplishments
+   - Identifies logical next steps for future sessions
+   - Verifies and maintains memory bank consistency
 
 ## Summary Table
 
@@ -264,6 +312,32 @@ Each server has defined command boundaries to ensure secure and appropriate usag
 3. **Command Boundaries**: Each server has a defined list of allowed commands
 4. **Connection Verification**: Server connections are verified on startup
 5. **Usage Logging**: All MCP operations are logged and included in session summaries
+
+## Smart MCP Integration
+
+Windsurf operations use a task-based approach that automatically selects the appropriate MCP server:
+
+1. **Capability-Focused Operations**
+   - Instead of specifying servers, you describe what you want to accomplish
+   - The system analyzes the task and selects the optimal MCP server
+   - Example: "Create a new repository" automatically uses GitHub MCP
+
+2. **Task Categories**
+   - **Version Control**: Repository and branch management
+   - **Web Interaction**: Navigate websites, capture screenshots, interact with elements
+   - **Database Operations**: Execute queries, manage schemas, create migrations
+   - **Complex Thinking**: Sequential problem solving, structured analysis
+   - **Documentation**: Access library docs, generate technical documentation
+
+3. **Adaptive Learning**
+   - The system tracks operation success rates
+   - Learns from previous executions to improve server selection
+   - Adapts to your preferences and workflow patterns
+
+4. **Integration with Workflows**
+   - Error handling framework informs MCP selection for recovery
+   - Session intelligence prepares relevant MCP tools based on context
+   - Task lifecycle events provide rich context for smarter tool selection
 
 ## Task Management Workflow
 

@@ -1,99 +1,137 @@
-# Windsurf Rules Configuration
+# Windsurf Rules - Smart MCP Configuration
 
+```yaml
 # Reference to global rules
 loader:
   rules:
     - global-rules.md
-  priority: "local"  # Local rules take precedence over global when both exist
+  priority: "local"
+  auto_reload_on_change: true
 
-# Core configuration sections
-coding_standards:
-  enforce_placeholder_editing: true
-  auto_linting: true
-  auto_formatting: true
-  testing_required_before_commit: true
-  llm_friendly_formatting: true
-  enforce_output_blocks: true
-  map_code_to_stories: true
-  inject_llm_links: true
+# Natural language enhancements
+natural_language_triggers:
+  commands:
+    - "update memory with [topic]": "UMB"
+    - "what's our current focus": "retrieve from activeContext.md"
+    - "how does [component] work": "retrieve from systemPatterns.md"
+    - "summarize current project": "SMB"
+    - "check memory bank health": "CMB"
+  contextual_awareness:
+    detect_implied_commands: true
+    infer_topics_from_conversation: true
+    recognize_decision_points: true
 
+# Memory bank improvements
 memory_bank_practices:
   session_tagging: true
   compact_summaries: true
   always_link_code_to_decisions: true
-  crosslink_agent_outputs: true
   auto_reference_injections: true
-  reverse_code_traceability: true
-  implementation_scan_on_sync: true
+  context_intelligence:
+    detect_domain_shifts: true
+    suggest_memory_updates_on_detection: true
+  memory_loading:
+    progressive_detail: true
+    priority_context_first: true
 
-memory_bank_structure:
-  use_global_hierarchy: true  # Use the hierarchy defined in global-rules.md
-  base_path: memory-bank/
-  primary_file: projectbrief.md
-
+# Enhanced commands
 commands:
   UMB:
     description: "Update Memory Bank with latest project context"
-    actions:
-      - "Update activeContext.md with current session info"
-      - "Update progress.md with task status changes"
-      - "Review and update hierarchical files as needed"
+    trigger_phrases: ["update memory bank", "save current context"]
+  SMB:
+    description: "Generate summary of current memory bank state"
+    trigger_phrases: ["summarize memory bank", "show project overview"]
+  CMB:
+    description: "Verify memory bank integrity and consistency"
+    trigger_phrases: ["check memory bank", "verify memory integrity"]
 
-agile_sync:
-  daily_focus_update: true
-  story_tracking: true
-  sprint_end_review_trigger: true
-  link_stories_to_progress_log: true
-  detect_blockers_from_epics: true
-  detect_implementation_mismatches: true
-
-mcp_usage:
-  always_log_server_context: true
-  auto_switch_servers_on_failure: true
-  # Enhanced MCP configuration based on best practices
-  prefer_mcp_over_direct_tools: true
-  enforce_mcp_for_operations: true
-  verify_connections_on_startup: true
-  server_mappings:
-    git_operations: github
-    web_testing: playwright
-    database_operations: supabase
-    sequential_thinking: sequential-thinking
-    documentation: context7
-    puppeteer_automation: puppeteer
-  operation_mappings:
-    repository_management: github
-    code_search: context7
-    prototype_testing: playwright
-    database_design: supabase
-    complex_problem_solving: sequential-thinking
-    ui_automation: puppeteer
-  allowed_commands:
-    github:
+# Smart MCP usage - task-based instead of server-based
+smart_mcp:
+  enable_automatic_server_selection: true
+  contextual_tool_selection: true
+  
+  # Task-based operation mapping
+  task_capabilities:
+    version_control:
       - create_repository
       - create_branch
       - push_files
-      - list_commits
-      - fork_repository
       - create_pull_request
-      - get_pull_request_files
-      - search_repositories
-    playwright:
-      - navigate
-      - screenshot
-      - click
-      - fill
-      - evaluate
-      - get_visible_html
-    supabase:
-      - execute_sql
-      - create_project
-      - apply_migration
-      - list_tables
-    context7:
-      - get-library-docs
-      - resolve-library-id
-  logging:
-    record_mcp_usage: true
-    include_in_session_summary: true
-    alert_on_usage_failure: true
+      - manage_issues
+    web_interaction:
+      - navigate_websites
+      - capture_screenshots
+      - interact_with_elements
+      - extract_content
+    database_operations:
+      - execute_queries
+      - manage_schemas
+      - create_migrations
+    complex_thinking:
+      - sequential_problem_solving
+      - structured_analysis
+    documentation:
+      - access_library_docs
+      - generate_technical_documentation
+    
+  # Capability prioritization
+  auto_selection_criteria:
+    - task_relevance
+    - operation_success_rate
+    - performance_metrics
+    - user_preferences
+  
+  learning:
+    remember_successful_patterns: true
+    adapt_to_user_workflow: true
+    optimize_server_selection: true
+
+# Workflow essentials
+workflow_enhancements:
+  context_retention:
+    prioritize_critical_information: true
+    adaptive_memory_pruning: true
+  
+  execution:
+    adaptive_execution_planning: true
+    progress_monitoring: true
+    self_correction_capabilities: true
+```
+
+## Implementation Approach
+
+To implement this smart MCP approach:
+
+1. Update your configuration to focus on capabilities rather than specific servers
+2. Allow the IDE to dynamically select the appropriate MCP server based on the task
+3. Train the system by using various capabilities and letting it learn which servers work best
+
+## Key Benefits
+
+1. **Simplified Configuration** - Focus on what you want to do, not which server to use
+2. **Adaptive Learning** - System improves server selection based on success patterns
+3. **Future-Proof** - New MCP servers can be integrated without rule changes
+4. **Task-Focused** - Operations are organized by task domains instead of server boundaries
+
+## Usage Examples
+
+Instead of specifying an MCP server explicitly:
+
+```
+# Before (server-specific):
+"Use GitHub MCP to create a repository"
+
+# Now (task-focused):
+"Create a new repository for this project"
+```
+
+The system automatically selects the appropriate MCP server (in this case GitHub) based on the task context.
+
+## How It Works
+
+1. The IDE analyzes the task request
+2. It maps the request to capability categories (e.g., version_control, web_interaction)
+3. It selects the optimal MCP server based on the capability needed and past performance
+4. It executes the operation using the selected server
+5. It learns from the outcome to improve future server selection
