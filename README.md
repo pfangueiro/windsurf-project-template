@@ -71,6 +71,120 @@ A minimal, robust, and extensible template for AI-assisted software development 
 - **AI-ready:** Designed for seamless human+AI collaboration, with clear boundaries and workflows.
 - **Secure and robust:** Only explicitly allowed operations and commands are permitted.
 
+---
+
+## Triggers: How to Activate Agents, Workflows, and System Operations
+
+### 1. Natural Language Triggers
+
+---
+
+## Advanced Functionalities & Best Practices
+
+Beyond the core memory bank and agent system, this template supports a range of advanced features for robust, traceable, and collaborative development:
+
+### Session Tagging & Summarization
+- All sessions are tagged with timestamps and focus.
+- Start/end summaries are recorded in `activeContext.md`.
+
+### Reverse Traceability
+- All code, decisions, requirements, and tests are linked for audit and compliance.
+
+### Automatic Reference Injection
+- Decisions/actions are auto-cited with relevant memory bank references.
+
+### Implementation Scan on Sync
+- Detects new patterns, decisions, or mismatches when syncing memory bank context.
+
+### Coding Standards Enforcement
+- Auto-formatting, linting, and testing before commit are enforced.
+
+### Security & Command Boundaries
+- Only explicitly allowed MCP commands can be executed; all operations are logged.
+
+### Agile & Story Tracking
+- Daily focus, story tracking, sprint reviews, and blocker detection are supported.
+
+### Agent Collaboration & Escalation
+- Multiple agents can be triggered and escalate tasks as needed.
+
+### Periodic Validation
+- Context validation occurs every 20 minutes or after major changes.
+
+### Customizable Workflows
+- Easily add new agents, triggers, or workflows by updating rules/memory bank files.
+
+#### Summary Table of Advanced Functionalities
+
+| Feature/Capability         | Description                                                                 |
+|---------------------------|-----------------------------------------------------------------------------|
+| Session Tagging           | Auto-records session start/end, focus, and summaries                        |
+| Reverse Traceability      | Links code, decisions, requirements, and tests for audits                    |
+| Reference Injection       | Auto-injects citations for decisions and actions                             |
+| Implementation Scan       | Detects new patterns and context changes on sync                             |
+| Coding Standards          | Enforces linting, formatting, and testing before commit                      |
+| Security Boundaries       | Restricts commands and logs all operations                                   |
+| Agile/Story Tracking      | Supports daily focus, sprint reviews, and links stories to progress          |
+| Agent Collaboration       | Multi-agent triggers and escalation paths                                    |
+| Periodic Validation       | Ensures context is always applied and up to date                             |
+| Custom Workflows          | Easily extensible for new agents, triggers, or integrations                  |
+
+---
+
+| Example User Input                                             | Triggered Agent/Workflow      |
+|---------------------------------------------------------------|-------------------------------|
+| “How should we prioritize the upcoming features?”              | Product Owner (PO)            |
+| “What’s the best way to structure our database schema?”        | Architect                     |
+| “What testing approach should we use for the payment system?”  | QA                            |
+| “Can you clarify the business value of this feature?”          | Business Analyst (BA)         |
+| “What are the security risks for this release?”                | Security Architect or QA      |
+| “What is the current project status?”                          | Project Manager (PM)          |
+| “How do we deploy to production?”                              | DevOps/Deployment Agent       |
+| “What documentation is available for this API?”                | Docs Agent                    |
+
+### 2. Direct Command Triggers
+| Command | Description                       | Triggered Action              |
+|---------|-----------------------------------|-------------------------------|
+| `UMB`   | Update Memory Bank                | Updates context/progress      |
+| `SMB`   | Summarize Memory Bank             | Generates project summary     |
+| `CMB`   | Check Memory Bank                 | Validates integrity/consistency|
+
+### 3. Agent Role Triggers
+| Mention/Keyword Example                     | Triggered Agent               |
+|---------------------------------------------|-------------------------------|
+| “feature description”, “user requirements”  | Business Analyst (BA)         |
+| “architecture”, “system design”             | Architect                     |
+| “project plan”, “timeline”, “status”        | Project Manager (PM)          |
+| “priority”, “backlog”, “sprint”             | Product Owner (PO)/Scrum Master (SM) |
+| “test”, “QA”, “verification”                | QA                            |
+| “documentation”, “spec”                     | Docs Agent                    |
+| “security”, “threat model”                  | Security Architect            |
+
+### 4. Workflow/Task Triggers
+| Workflow Phrase/Action                      | Triggered Workflow            |
+|---------------------------------------------|-------------------------------|
+| “Create a new task/story/epic”              | Task Management Workflow      |
+| “Start a new sprint”                        | Sprint Planning Workflow      |
+| “Run tests”                                 | Test Execution Workflow       |
+| “Deploy to staging/production”              | Deployment Workflow           |
+
+### 5. MCP Operation Triggers
+| User Intent                                 | Triggered MCP Server          |
+|---------------------------------------------|-------------------------------|
+| “Push code”, “create branch”, “list commits”| GitHub MCP                    |
+| “Test UI”, “take screenshot”                | Playwright MCP                |
+| “Query database”, “apply migration”         | Supabase MCP                  |
+| “Summarize documentation”                   | Context7 MCP                  |
+
+### Quick-Reference Trigger Table
+| Trigger Type        | Example/Command                                  | Activated Agent/Workflow         |
+|---------------------|--------------------------------------------------|----------------------------------|
+| Natural Language    | “How should we prioritize features?”             | Product Owner                    |
+| Direct Command      | `UMB`, `SMB`, `CMB`                              | Memory Bank System               |
+| Agent Role Mention  | “What’s the architecture?”                       | Architect                        |
+| Workflow/Task       | “Create a new epic”                              | Task Management                  |
+| MCP Operation       | “Push code”, “run tests”, “query DB”             | GitHub, Playwright, Supabase MCP |
+
 ## Key Features
 
 - **Smart Trigger System**: Natural language activation of specialized agents without explicit commands
