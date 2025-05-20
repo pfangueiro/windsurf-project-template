@@ -7,7 +7,7 @@ Follow these steps to create a private GitHub repository for your Windsurf Proje
 1. Go to [GitHub](https://github.com/) and sign in to your account
 2. Click on the "+" icon in the top-right corner and select "New repository"
 3. Enter "windsurf-project-template" as the Repository name
-4. Add a description: "A comprehensive project structure template for AI-assisted software development using the Windsurf framework"
+4. Add a description: "A comprehensive project structure template with hierarchical memory bank system for AI-assisted software development using the Windsurf framework"
 5. Select "Private" for repository visibility
 6. Check "Add a README file" (we'll replace it with our custom README)
 7. Select "Add .gitignore" and choose "Node" (we'll replace it with our custom .gitignore)

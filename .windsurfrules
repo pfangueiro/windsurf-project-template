@@ -1,461 +1,52 @@
-# ────────────────────────────────
-# File: .windsurfrules (Updated Version with Task Management and TDD Workflow)
-# ────────────────────────────────
+# Windsurf Rules Configuration
+
+# Reference to global rules
 loader:
   rules:
-    - global-rules.yaml
-    - local-rules.yaml
-  agents:
-    - agent: BA
-      instructions: agents/analyst.md
-      knowledge:
-        - templates/project-brief.md
-      triggers:
-        - feature description
-        - user requirements
-        - business value
-        - market analysis
-        - requirement change
-        - feature update
-      task_permissions:
-        can_create:
-          - feature
-          - documentation
-        can_review:
-          - documentation
-          - user story
-          - acceptance criteria
+    - global-rules.md
+  priority: "local"  # Local rules take precedence over global when both exist
 
-    - agent: PM
-      instructions: agents/pm-agent.md
-      knowledge:
-        - templates/prd.md
-        - templates/epicN.md
-        - templates/pm-checklist.md
-        - templates/ui-ux-spec.md
-        - artifacts/briefs/project-brief.md
-      triggers:
-        - timelines
-        - dependencies
-        - resource allocation
-        - risk management
-        - project impact
-        - schedule change
-      task_permissions:
-        can_create:
-          - epic
-          - story
-          - milestone
-        can_review:
-          - task dependencies
-          - timelines
-          - resource allocation
-
-    - agent: Architect
-      instructions: agents/architect-agent.md
-      knowledge:
-        - templates/architect-checklist.md
-        - templates/architecture-templates.md
-        - artifacts/architecture/architecture.md
-        - artifacts/architecture/tech-stack.md
-      triggers:
-        - technical feasibility
-        - design patterns
-        - architecture impact
-        - technical debt
-        - implementation change
-        - requirement impact
-      task_permissions:
-        can_create:
-          - feature
-          - refactor
-          - architecture
-        can_review:
-          - feature
-          - refactor
-          - test
-          - technical implementation
-
-    - agent: PO
-      instructions: agents/sm-agent.md
-      knowledge:
-        - templates/story-template.md
-        - templates/po-checklist.md
-        - templates/story-draft-checklist.md
-        - artifacts/requirements/prd.md
-        - artifacts/requirements/epicN.md
-        - artifacts/architecture/architecture.md
-        - docs/api-reference.md
-        - docs/data-models.md
-        - docs/coding-standards.md
-        - docs/environment-vars.md
-        - docs/testing-strategy.md
-        - docs/project-structure.md
-        - docs/ui-ux-spec.md
-      triggers:
-        - feature priority
-        - acceptance criteria
-        - user stories
-        - value proposition
-        - requirement review
-        - story adjustment
-      task_permissions:
-        can_create:
-          - feature
-          - story
-          - documentation
-        can_review:
-          - feature
-          - documentation
-          - user value
-          - acceptance criteria
-
-    - agent: ScrumMaster
-      instructions: agents/sm-agent.md
-      knowledge:
-        - templates/story-template.md
-        - templates/po-checklist.md
-        - templates/story-draft-checklist.md
-        - docs/project-structure.md
-      triggers:
-        - sprint planning
-        - impediment removal
-        - team facilitation
-        - process improvement
-        - workflow adjustment
-      task_permissions:
-        can_create: []
-        can_review:
-          - feature
-          - bug
-          - documentation
-          - refactor
-          - test
-          - process
-
-    - agent: Developer
-      instructions: agents/dev-agent.md
-      knowledge:
-        - artifacts/requirements/prd.md
-        - artifacts/architecture/architecture.md
-        - docs/api-reference.md
-        - artifacts/stories/*
-        - docs/coding-standards.md
-        - docs/data-models.md
-        - docs/environment-vars.md
-        - docs/testing-strategy.md
-      triggers:
-        - implementation approach
-        - coding standards
-        - technical constraints
-        - refactoring needs
-        - code impact assessment
-      task_permissions:
-        can_create:
-          - feature
-          - bug
-          - refactor
-          - test
-        can_review:
-          - feature
-          - bug
-          - refactor
-          - test
-          - code
-
-    - agent: Docs
-      instructions: agents/docs-agent.md
-      knowledge:
-        - docs/api-reference.md
-        - templates/story-template.md
-        - templates/story-draft-checklist.md
-        - docs/ui-ux-spec.md
-      triggers:
-        - documentation needs
-        - api changes
-        - user-facing content
-        - technical documentation
-        - documentation update
-      task_permissions:
-        can_create:
-          - documentation
-        can_review:
-          - documentation
-          - api docs
-          - user guides
-
-    - agent: QA
-      instructions: agents/qa-agent.md
-      knowledge:
-        - docs/testing-strategy.md
-        - artifacts/requirements/prd.md
-        - artifacts/stories/*
-        - docs/api-reference.md
-        - templates/story-template.md
-        - docs/coding-standards.md
-      triggers:
-        - testability
-        - test plans
-        - quality risks
-        - regression impacts
-        - test case update
-      task_permissions:
-        can_create:
-          - bug
-          - test
-        can_review:
-          - feature
-          - bug
-          - test
-          - quality
-
-# Cross-functional teams
-teams:
-  requirement_analysis:
-    members: [BA, PO, Architect]
-    activities: [feature analysis, requirements gathering, feasibility assessment]
-  
-  technical_planning:
-    members: [Architect, Developer, QA]
-    activities: [technical design, implementation planning, test strategy]
-  
-  implementation:
-    members: [Developer, Architect, QA]
-    activities: [code development, code review, unit testing]
-  
-  quality_assurance:
-    members: [QA, Developer, BA]
-    activities: [test execution, bug verification, acceptance testing]
-  
-  documentation:
-    members: [Docs, Developer, PO]
-    activities: [api documentation, user guides, technical documentation]
-    
-  # Team for requirement impact analysis
-  requirement_impact_analysis:
-    members: [BA, PO, Architect, QA]
-    activities: [impact assessment, plan adjustment, story refinement, documentation update]
-    
-  # New team for test-driven development
-  test_driven_development:
-    members: [Developer, QA, Architect]
-    activities: [test definition, test implementation, test execution, code implementation]
-
-# Workflow triggers for specific actions
-workflow_triggers:
-  BA_triggers: ["@BA", "analyze requirement", "business analysis", "market need"]
-  Architect_triggers: ["@Architect", "architecture", "design pattern", "technical approach"]
-  PM_triggers: ["@PM", "timeline", "project plan", "resource need"]
-  PO_triggers: ["@PO", "product backlog", "feature priority", "user story"]
-  QA_triggers: ["@QA", "testing", "quality", "test plan", "verification"]
-  Developer_triggers: ["@Developer", "implementation", "code", "develop"]
-  Docs_triggers: ["@Docs", "documentation", "api docs", "user guide"]
-  
-  # Trigger for requirement review workflow
-  requirement_review_triggers: ["new requirement", "requirement change", "feature update", "@RequirementReview"]
-  
-  # New triggers for task management and TDD workflow
-  task_management_triggers: ["@CreateTask", "new task", "create task", "add task"]
-  task_update_triggers: ["@UpdateTask", "update task", "change task", "task status"]
-  test_creation_triggers: ["@CreateTest", "new test", "create test", "add test"]
-  test_execution_triggers: ["@RunTests", "run tests", "execute tests", "test task"]
-  report_generation_triggers: ["@GenerateReport", "create report", "task report", "progress report"]
-
-# Project structure enforced by the loader
-filesystem:
-  enforce:
-    - templates/
-    - templates/task-templates/
-    - templates/report-templates/
-    - agents/
-    - memory-bank/
-    - docs/
-    - ai/stories/
-    - ai/epics/
-    - code/
-    - logs/
-    - artifacts/
-    - tasks/
-    - tasks/active/
-    - tasks/completed/
-    - tasks/templates/
-    - tests/
-    - tests/unit/
-    - tests/integration/
-    - tests/acceptance/
-    - reports/
-    - reports/task-completion/
-    - reports/story-completion/
-    - reports/epic-completion/
-    - .windsurfrules
-    - codebase_sync.sh
-    - codebase_snapshot.md
-    - code_links.md
-    - document-manifest.md
-
-# Development standards and practices
+# Core configuration sections
 coding_standards:
   enforce_placeholder_editing: true
   auto_linting: true
   auto_formatting: true
   testing_required_before_commit: true
+  llm_friendly_formatting: true
+  enforce_output_blocks: true
+  map_code_to_stories: true
+  inject_llm_links: true
 
 memory_bank_practices:
   session_tagging: true
   compact_summaries: true
-  always_link_code_to_decisions: true
-  track_task_status: true
-  link_tasks_to_tests: true
+  always_link_code_to_decisions: true  # Fixed hyphen to underscore
+  crosslink_agent_outputs: true
+  auto_reference_injections: true
+  reverse_code_traceability: true
+  implementation_scan_on_sync: true
+
+memory_bank_structure:
+  use_global_hierarchy: true  # Use the hierarchy defined in global-rules.md
+  base_path: memory-bank/
+  primary_file: projectbrief.md
+
+commands:
+  UMB:
+    description: "Update Memory Bank with latest project context"
+    actions:
+      - "Update activeContext.md with current session info"
+      - "Update progress.md with task status changes"
+      - "Review and update hierarchical files as needed"
 
 agile_sync:
   daily_focus_update: true
   story_tracking: true
   sprint_end_review_trigger: true
-  task_progress_tracking: true
-  test_coverage_reporting: true
-
-# Task management system
-task_management_system:
-  enabled: true
-  storage:
-    directory: tasks/
-    structure:
-      - active/
-      - completed/
-      - templates/
-  
-  task_types:
-    - feature
-    - bug
-    - documentation
-    - refactor
-    - test
-    - story
-    - epic
-  
-  status_values:
-    - to_do
-    - in_progress
-    - testing
-    - done
-  
-  priority_values:
-    - low
-    - medium
-    - high
-    - critical
-  
-  auto_creation:
-    from_agent_input: true
-    from_requirements: true
-    test_tasks_with_features: true
-  
-  templates:
-    feature_task: templates/task-templates/feature-task.yaml
-    bug_task: templates/task-templates/bug-task.yaml
-    test_task: templates/task-templates/test-task.yaml
-    story_task: templates/task-templates/story-task.yaml
-    epic_task: templates/task-templates/epic-task.yaml
-
-# Task management practices
-task_management:
-  workflow:
-    creation:
-      - "Create task with clear scope, measurable goals and acceptance criteria"
-      - "Estimate task duration (aim for 2 hours max per task)"
-      - "Identify dependencies and prerequisites"
-      - "Assign to appropriate agent(s)"
-      - "Generate unique task ID in format TASK-[number]"
-      - "Automatically create test tasks for feature tasks"
-    execution:
-      - "Update activeContext.md with current task focus"
-      - "Follow defined process for implementation"
-      - "Document progress in real-time"
-      - "Report blockers immediately"
-      - "Update task status as work progresses"
-    review:
-      - "Self-review by implementing agent"
-      - "Cross-review by another relevant agent"
-      - "Verify against acceptance criteria"
-      - "Execute all related tests and verify they pass"
-    completion:
-      - "Document completion in progress.md"
-      - "Update any relevant documentation"
-      - "Capture decisions in decisionLog.md"
-      - "Update memory bank with UMB command"
-      - "Automatically update status of dependent tasks"
-      - "Generate completion report"
-  documentation:
-    task_format:
-      - "ID: Unique identifier (TASK-[number])"
-      - "Title: Clear, concise description"
-      - "Agent: Responsible agent(s)"
-      - "Deadline: Expected completion timeframe"
-      - "Dependencies: Related tasks or prerequisites"
-      - "Acceptance: Measurable criteria for completion"
-      - "Status: to_do, in_progress, testing, done"
-      - "Related Tests: List of test IDs"
-      - "Related Story: Story ID"
-      - "Related Epic: Epic ID"
-      - "Artifacts: Expected deliverables"
-    progress_update:
-      format: "[YYYY-MM-DD HH:MM:SS] - [Task ID] - [Status] - [Description]"
-      statuses: ["Started", "In Progress", "Blocked", "Completed", "Deferred"]
-  
-  # Test-driven development workflow
-  test_driven_workflow:
-    enabled: true
-    enforce_test_first: true
-    storage:
-      directory: tests/
-      structure:
-        - unit/
-        - integration/
-        - acceptance/
-    
-    test_types:
-      - unit
-      - integration
-      - system
-      - acceptance
-    
-    status_values:
-      - to_do
-      - in_progress
-      - failed
-      - passed
-    
-    requirements:
-      coverage_minimum: 80
-      all_tests_pass: true
-      review_required: true
-    
-    progression_rules:
-      task_completion_requires_tests: true
-      story_completion_requires_all_tasks: true
-      epic_completion_requires_all_stories: true
-      test_documentation_required: true
-  
-  # Requirement review workflow
-  requirement_review_workflow:
-    trigger: "@RequirementReview"
-    steps:
-      - "Analyze new requirement against existing plan"
-      - "Identify affected epics and stories"
-      - "Assess architecture impact"
-      - "Update relevant documentation"
-      - "Adjust project timeline if necessary"
-      - "Create or update tasks based on requirement changes"
-      - "Update test requirements"
-      - "Report impact assessment summary"
-    outputs:
-      - "Updated epics and stories"
-      - "Architecture change recommendations"
-      - "Timeline adjustments"
-      - "Documentation updates"
-      - "New or updated tasks"
-      - "New or updated tests"
+  link_stories_to_progress_log: true
+  detect_blockers_from_epics: true
+  detect_implementation_mismatches: true
 
 mcp_usage:
   always_log_server_context: true
-  auto-switch-servers-on-failure: true
+  auto_switch_servers_on_failure: true

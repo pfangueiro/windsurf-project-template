@@ -10,7 +10,7 @@ This repository provides a standardized project structure designed to work seaml
 
 - **Smart Trigger System**: Natural language activation of specialized agents without explicit commands
 - **Priority-Based Response**: Intelligent handling of multiple agent triggers in conversation
-- **Memory Bank System**: Persistent context tracking across sessions
+- **Hierarchical Memory Bank System**: Persistent context tracking across sessions with clear file dependencies
 - **Agent-Based Development**: Specialized AI agents for different roles
 - **Secure SDLC Integration**: Security-focused development with specialized security agents
 - **Dual Methodology Support**: Support for both Agile and Waterfall development methodologies
@@ -84,12 +84,13 @@ Activate cross-functional teams for complex activities:
 
 ```
 /
-├── memory-bank/              # Project memory and context tracking (auto-created)
-│   ├── activeContext.md      # Current session state and goals
-│   ├── productContext.md     # Project scope definition
-│   ├── progress.md           # Task status and completion
-│   ├── decisionLog.md        # Technical and architectural decisions
-│   └── systemPatterns.md     # Design patterns and standards
+├── memory-bank/             # Project memory system (auto-initialized)
+│   ├── projectbrief.md       # Foundation document defining requirements and goals
+│   ├── productContext.md     # Project scope and problems it solves
+│   ├── systemPatterns.md     # Architecture and design patterns
+│   ├── techContext.md        # Technologies, setup, and dependencies
+│   ├── activeContext.md      # Current focus, decisions, and considerations
+│   └── progress.md           # Work status tracking
 │
 ├── templates/                # Project templates (pre-existing)
 │   ├── project-brief.md      # Project overview template
@@ -267,7 +268,7 @@ All agents share access to the memory bank, ensuring continuity across conversat
 
 - Shared memory across all agents
 - Explicit knowledge transfer between agents during handoffs
-- Centralized decision tracking in decisionLog.md
+- Decisions tracked in activeContext.md
 
 > **Note**: For examples of natural language triggers in conversation, see `docs/trigger-examples.md`
 
@@ -356,7 +357,7 @@ The memory bank system provides persistent context across development sessions t
 | activeContext.md | Tracks current session focus and goals | At session start and when focus changes |
 | productContext.md | Defines project scope and components | When project scope or architecture changes |
 | progress.md | Tracks work status and next steps | When tasks start or complete |
-| decisionLog.md | Records important decisions with rationale | When significant decisions are made |
+| activeContext.md | Records current focus, decisions, and considerations | Throughout the session |
 | systemPatterns.md | Documents recurring patterns and practices | When patterns are identified or defined |
 
 All responses begin with `[MEMORY BANK: ACTIVE]` when the system is properly initialized. The memory bank can be explicitly updated using the `UMB` command.
@@ -461,7 +462,7 @@ The system enforces several strict rules:
 2. New code must adhere to coding standards defined in docs/coding-standards.md
 3. Stories cannot be marked complete until all tasks are done
 4. Epics cannot be marked complete until all stories are done
-5. All decisions must be documented in decisionLog.md
+5. All decisions must be documented in activeContext.md
 6. Agent roles must stay within their defined responsibilities
 7. Memory bank must be kept up-to-date using UMB command
 

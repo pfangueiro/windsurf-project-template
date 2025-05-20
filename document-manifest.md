@@ -6,10 +6,9 @@ This file serves as a guide to the location of all project documents, both templ
 
 These documents provide comprehensive information about the advanced trigger system:
 
-- **README.improved.md** - Main documentation with quick start guide and complete feature overview
-- **docs/trigger-examples.md** - Extensive examples of using triggers in natural conversation
-- **windsurfrules.updated** - Configuration file with trigger definitions and scoring mechanisms
 - **global-rules.md** - System-wide rules for agent activation and memory maintenance
+- **.windsurfrules** - Local configuration file for project-specific settings
+- **README.md** - Main documentation with quick start guide
 
 ## Security and Waterfall Methodology Documentation
 
@@ -118,13 +117,14 @@ The `docs/` directory contains finalized documentation that is referenced by dev
 - `docs/ui-ux-spec.md` - UI/UX specifications
 
 ## Memory Bank System
-The memory bank system maintains project context across sessions through five core files in the `memory-bank/` directory:
+The memory bank system maintains project context across sessions through six core files in the `memory-bank/` directory:
 
-- `memory-bank/activeContext.md` - Tracks current session state and goals (auto-updated)
+- `memory-bank/projectbrief.md` - Foundation document defining core requirements and goals
 - `memory-bank/productContext.md` - Defines project scope and components (updated on scope changes)
-- `memory-bank/progress.md` - Tracks work status and next steps (updated on task status changes)
-- `memory-bank/decisionLog.md` - Records key decisions with rationale (updated when decisions are made)
 - `memory-bank/systemPatterns.md` - Documents recurring patterns and practices (updated when patterns are identified)
+- `memory-bank/techContext.md` - Technologies used, development setup, technical constraints, dependencies
+- `memory-bank/activeContext.md` - Current work focus, decisions, and considerations (updated throughout the session)
+- `memory-bank/progress.md` - Tracks work status and next steps (updated on task status changes)
 
 ## System Configuration Files
 Core configuration files for the Windsurf Project Template:
