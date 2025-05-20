@@ -20,7 +20,7 @@ coding_standards:
 memory_bank_practices:
   session_tagging: true
   compact_summaries: true
-  always_link_code_to_decisions: true  # Fixed hyphen to underscore
+  always_link_code_to_decisions: true
   crosslink_agent_outputs: true
   auto_reference_injections: true
   reverse_code_traceability: true
@@ -50,3 +50,50 @@ agile_sync:
 mcp_usage:
   always_log_server_context: true
   auto_switch_servers_on_failure: true
+  # Enhanced MCP configuration based on best practices
+  prefer_mcp_over_direct_tools: true
+  enforce_mcp_for_operations: true
+  verify_connections_on_startup: true
+  server_mappings:
+    git_operations: github
+    web_testing: playwright
+    database_operations: supabase
+    sequential_thinking: sequential-thinking
+    documentation: context7
+    puppeteer_automation: puppeteer
+  operation_mappings:
+    repository_management: github
+    code_search: context7
+    prototype_testing: playwright
+    database_design: supabase
+    complex_problem_solving: sequential-thinking
+    ui_automation: puppeteer
+  allowed_commands:
+    github:
+      - create_repository
+      - create_branch
+      - push_files
+      - list_commits
+      - fork_repository
+      - create_pull_request
+      - get_pull_request_files
+      - search_repositories
+    playwright:
+      - navigate
+      - screenshot
+      - click
+      - fill
+      - evaluate
+      - get_visible_html
+    supabase:
+      - execute_sql
+      - create_project
+      - apply_migration
+      - list_tables
+    context7:
+      - get-library-docs
+      - resolve-library-id
+  logging:
+    record_mcp_usage: true
+    include_in_session_summary: true
+    alert_on_usage_failure: true
