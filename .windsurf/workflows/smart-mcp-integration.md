@@ -2,149 +2,94 @@
 description: Smart MCP Integration Framework
 ---
 
-# Smart MCP Integration Framework
+# Smart MCP Integration Workflow
 
-This workflow shows how all the workflow enhancements integrate with your smart MCP configuration.
+This workflow defines how to intelligently select and use Model Context Protocol (MCP) servers based on task requirements rather than explicit server selection.
 
-```yaml
-smart_mcp_integration:
-  workflow_components:
-    memory_structure:
-      enabled: true
-      integration_points:
-        - "Context provision for MCP tool selection"
-        - "Hierarchical memory access for operations"
-        - "Pattern storage for future operations"
-      
-    task_lifecycle:
-      enabled: true
-      integration_points:
-        - "Task context informs capability selection"
-        - "Progress tracking adapts tool selection"
-        - "Quality metrics trigger specific capabilities"
-      
-    error_handling:
-      enabled: true
-      integration_points:
-        - "Error classification informs tool selection"
-        - "Recovery strategies leverage appropriate MCP servers"
-        - "Learning loop improves future selection"
-      
-    memory_consistency:
-      enabled: true
-      integration_points:
-        - "Verified memory ensures reliable MCP context"
-        - "Consistency checks prevent actions on corrupt data"
-        - "Recovery uses optimal MCP tools"
-      
-    session_intelligence:
-      enabled: true
-      integration_points:
-        - "Session startup prepares relevant MCP tools"
-        - "Focus tracking adapts tool selection"
-        - "Knowledge capture for future operations"
-  
-  task_to_capability_mapping:
-    code_generation:
-      capabilities:
-        - "sequential_problem_solving"
-        - "access_library_docs"
-      context_sources:
-        - "systemPatterns.md"
-        - "relevant task logs"
-    
-    debugging:
-      capabilities:
-        - "error analysis"
-        - "sequential_problem_solving"
-      context_sources:
-        - "errors directory"
-        - "similar code patterns"
-    
-    web_development:
-      capabilities:
-        - "navigate_websites"
-        - "capture_screenshots"
-        - "interact_with_elements"
-      context_sources:
-        - "techContext.md"
-        - "related task logs"
-    
-    database_work:
-      capabilities:
-        - "execute_queries"
-        - "manage_schemas"
-        - "create_migrations"
-      context_sources:
-        - "database models"
-        - "schema documentation"
-  
-  natural_language_processing:
-    intent_recognition:
-      capability_mapping:
-        - "build feature X": "code_generation"
-        - "fix error in Y": "debugging"
-        - "test webpage Z": "web_development"
-        - "update database schema": "database_work"
-    
-    context_awareness:
-      task_history_influence: true
-      codebase_analysis: true
-      error_pattern_recognition: true
-    
-    continuous_learning:
-      success_pattern_storage: true
-      effectiveness_tracking: true
-      operation_chaining_optimization: true
+```mermaid
+flowchart TD
+    Start[Start] --> analyzeTaskIntent[analyzeTaskIntent]
+    analyzeTaskIntent --> identifyRequiredCapabilities[identifyRequiredCapabilities]
+    identifyRequiredCapabilities --> selectOptimalServer[selectOptimalServer]
+    selectOptimalServer --> executeOperation[executeOperation]
+    executeOperation --> evaluateSuccess{evaluateSuccess}
+    evaluateSuccess -->|Success| recordPattern[recordPattern]
+    evaluateSuccess -->|Failure| analyzeFailure[analyzeFailure]
+    analyzeFailure --> adjustParameters[adjustParameters]
+    adjustParameters --> retryOperation[retryOperation]
+    retryOperation --> checkRetrySuccess{checkRetrySuccess}
+    checkRetrySuccess -->|Success| recordPattern
+    checkRetrySuccess -->|Failure| escalateToUser[escalateToUser]
+    recordPattern --> updateMemoryBank[updateMemoryBank]
 ```
 
-## Usage with Workflow Commands
+## Steps
 
-The integration framework connects all workflow enhancements with the smart MCP configuration:
-
-1. **Start a New Task**
+1. **Analyze Task Intent**: Determine the core purpose of the user's request
+   ```javascript
+   function analyzeTaskIntent(userRequest) {
+     // Extract intent using natural language understanding
+     return { primaryIntent, secondaryIntents };
+   }
    ```
-   /task-lifecycle start "Implement user authentication"
-   ```
-   This triggers:
-   - Memory structure to load relevant context
-   - Session intelligence to prepare the environment
-   - Smart MCP to select appropriate capabilities
 
-2. **Handle Errors**
+2. **Identify Required Capabilities**: Map intent to necessary capabilities
+   ```javascript
+   function identifyRequiredCapabilities(intent) {
+     const capabilityMap = {
+       'code_creation': ['code_generation', 'documentation'],
+       'version_control': ['repository_management', 'code_review'],
+       'web_interaction': ['navigation', 'content_extraction'],
+       'database': ['query_execution', 'schema_management']
+     };
+     return capabilityMap[intent.primary] || [];
+   }
    ```
-   /error-handling classify "Database connection timeout"
+
+3. **Select Optimal Server**: Choose the best MCP server based on capabilities
+   ```javascript
+   function selectOptimalServer(capabilities, history) {
+     // Score each server based on capabilities and past performance
+     return bestMatchingServer;
+   }
    ```
-   This triggers:
-   - Error classification and logging
-   - Recovery strategy selection
-   - MCP tool selection for resolution
 
-3. **Verify Memory Consistency**
+4. **Execute Operation**: Perform the action using the selected server
+   ```javascript
+   function executeOperation(server, parameters) {
+     return server.execute(parameters);
+   }
    ```
-   /memory-consistency verify
+
+5. **Evaluate Success**: Determine if the operation was successful
+   ```javascript
+   function evaluateSuccess(result) {
+     return result.status === 'success';
+   }
    ```
-   This triggers:
-   - Checksum verification of memory files
-   - Inconsistency detection and resolution
-   - MCP selection for recovery if needed
 
-4. **Enhance Session Management**
+6. **Record Pattern**: Document successful approach in memory
+   ```javascript
+   function recordPattern(task, server, result) {
+     memory.savePattern({
+       task: task.type,
+       server: server.id,
+       success: true,
+       performance: result.metrics
+     });
+   }
    ```
-   /session-intelligence summarize
+
+7. **Update Memory Bank**: Ensure memory system reflects latest learnings
+   ```javascript
+   function updateMemoryBank(patterns) {
+     // Update activeContext.md with new MCP integration patterns
+   }
    ```
-   This triggers:
-   - Session summary generation
-   - Knowledge capture and organization
-   - Preparation for next session
 
-## Benefits of Integrated Workflows
+## Benefits
 
-This integrated approach delivers significant benefits:
-
-1. **Contextual Intelligence**: All workflows share context for better decision-making
-2. **Seamless Tool Selection**: MCP capabilities are selected based on comprehensive context
-3. **Learning System**: Successful patterns are captured and reused across workflows
-4. **Adaptive Assistance**: The system evolves based on your specific working patterns
-
-By using these workflows together with your smart MCP configuration, you create a powerful environment where the IDE intelligently selects the right tools based on comprehensive context from all sources.
+- **Context Preservation**: Maintains task context across different MCP servers
+- **Adaptability**: System improves server selection based on past performance
+- **Transparency**: Documents why specific MCP servers were chosen for tasks
+- **Efficiency**: Reduces the need for user specification of servers
