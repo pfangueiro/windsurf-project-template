@@ -1,8 +1,6 @@
 # Windsurf Project Template
 
-A minimal, robust, and extensible template for AI-assisted software development using the Windsurf IDE. This template leverages a hierarchical memory bank system and advanced rules to streamline human+AI collaboration, ensure traceable and auditable decision-making, and enforce best practices throughout the project lifecycle.
-
-## Project Intention & Purpose
+A comprehensive project structure template for AI-assisted software development using the Windsurf framework. This template implements a hierarchical memory system to:
 
 - **Persist project context** across sessions and contributors
 - **Enable traceable, explainable decision-making** via memory bank updates
@@ -21,7 +19,7 @@ A minimal, robust, and extensible template for AI-assisted software development 
 
 ### Smart Workflows System
 - **Memory Structure**: Three-layer hierarchical approach (foundation → context → current state)
-- **Memory Update**: Comprehensive process ensuring ALL files are reviewed when triggered
+- **Memory Update**: Comprehensive process ensuring ALL files are reviewed when triggered by "update memory bank"
 - **Task Lifecycle**: Structured events for workflow tracking and automation
 - **Error Handling**: Framework for detection, logging, and recovery
 - **Memory Consistency**: Verification system for memory bank reliability
@@ -289,16 +287,22 @@ Simply ask questions using natural language - the right agent will automatically
 
 ## Memory Bank System
 
-The memory bank system maintains project context across sessions through six core files in the `memory-bank/` directory:
+The memory bank system maintains project context across sessions through a hierarchical three-layer structure of files in the `memory-bank/` directory:
 
+### Foundation Layer (Source of Truth)
 - `memory-bank/projectbrief.md` - Foundation document defining core requirements and goals
+
+### Context Layer (Derived from Foundation)
 - `memory-bank/productContext.md` - Defines project scope and components (updated on scope changes)
 - `memory-bank/systemPatterns.md` - Documents recurring patterns and practices (updated when patterns are identified)
 - `memory-bank/techContext.md` - Technologies used, development setup, technical constraints, dependencies
+
+### Current State Layer (Derived from Context)
 - `memory-bank/activeContext.md` - Current work focus, decisions, and considerations (updated throughout the session)
 - `memory-bank/progress.md` - Tracks work status and next steps (updated on task status changes)
+- `memory-bank/decisionLog.md` - Key decisions and rationale with timestamp tracking
 
-All responses begin with `[MEMORY BANK: ACTIVE]` when the system is properly initialized. The memory bank can be explicitly updated using the `UMB` command.
+All responses begin with `[MEMORY BANK: ACTIVE]` when the system is properly initialized. The memory bank can be explicitly updated using the `UMB` command or by saying "update memory bank" which triggers a comprehensive review of ALL memory files.
 
 ## MCP Server Integration
 
@@ -351,4 +355,43 @@ Windsurf operations use a task-based approach that automatically selects the app
 
 Tasks follow a structured lifecycle:
 
-(…rest of README unchanged…)
+## System Organization
+
+The Windsurf Project Template is organized into a clear directory structure:
+
+```
+/
+├── .windsurf/              # Core system files
+│   ├── core/               # Core system components
+│   │   ├── event-handlers.md       # Event lifecycle handlers
+│   │   ├── function-map.md         # System function definitions
+│   │   ├── mcp-capability-map.md   # MCP server mappings
+│   │   ├── memory-index.md         # Memory file index and checksums
+│   │   ├── memory-system.md        # Memory system architecture
+│   │   └── rules.md                # System rules and constraints
+│   ├── errors/             # Error handling and recovery
+│   ├── plans/              # Implementation plans
+│   └── workflows/          # System workflows
+│       ├── documentation.md        # Documentation workflow
+│       ├── error-handling.md       # Error recovery framework
+│       ├── evaluation.md           # Performance evaluation
+│       ├── implementation.md       # Implementation process
+│       ├── initialization.md       # System initialization
+│       ├── memory-consistency.md   # Memory verification
+│       ├── memory-structure.md     # Three-layer memory approach
+│       ├── memory-update.md        # Memory update process
+│       ├── self-critique.md        # Self-improvement
+│       ├── session-intelligence.md # Session management
+│       ├── smart-mcp-integration.md # MCP integration
+│       └── task-lifecycle.md       # Task tracking
+├── memory-bank/           # Hierarchical memory files
+│   ├── projectbrief.md            # Foundation layer
+│   ├── productContext.md          # Context layer
+│   ├── systemPatterns.md          # Context layer
+│   ├── techContext.md             # Context layer
+│   ├── activeContext.md           # Current state layer
+│   ├── progress.md                # Current state layer
+│   └── decisionLog.md             # Current state layer
+├── .windsurfrules         # Project intelligence
+└── README.md              # Project documentation
+```
