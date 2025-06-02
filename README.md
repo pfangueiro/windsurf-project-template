@@ -1,12 +1,13 @@
 # Windsurf Project Template
 
-A comprehensive project structure template for AI-assisted software development using the Windsurf framework. This template implements a hierarchical memory system to:
+A comprehensive and robust template for AI-assisted software development using the Windsurf framework. This template leverages a hierarchical memory bank system and advanced rules to streamline human+AI collaboration, ensure traceable and auditable decision-making, and enforce best practices throughout the project lifecycle.
+
+## Project Intention & Purpose
 
 - **Persist project context** across sessions and contributors
 - **Enable traceable, explainable decision-making** via memory bank updates
 - **Support agent-based workflows** with clear boundaries and triggers
 - **Ensure security, best practices, and auditability** in all project operations
-
 ## Core Functionalities
 
 ### Hierarchical Memory Bank System
@@ -19,7 +20,11 @@ A comprehensive project structure template for AI-assisted software development 
 
 ### Smart Workflows System
 - **Memory Structure**: Three-layer hierarchical approach (foundation → context → current state)
+<<<<<<< HEAD
 - **Memory Update**: Comprehensive process ensuring ALL files are reviewed when triggered by "update memory bank"
+=======
+- **Memory Update**: Comprehensive process ensuring ALL files are reviewed when triggered
+>>>>>>> 12731ef5656d311d7de44a2b8eafe964e329af7c
 - **Task Lifecycle**: Structured events for workflow tracking and automation
 - **Error Handling**: Framework for detection, logging, and recovery
 - **Memory Consistency**: Verification system for memory bank reliability
@@ -131,6 +136,60 @@ A comprehensive project structure template for AI-assisted software development 
 
 ### 1. Natural Language Triggers
 
+<<<<<<< HEAD
+=======
+Each agent has natural language triggers that activate their specialized capabilities:
+
+```
+"Can you help me understand the business requirements?"
+(Triggers Business Analyst agent)
+
+"How are we tracking against our project timeline?"
+(Triggers Project Manager agent)
+
+"What's the best architecture approach for this feature?"
+(Triggers Architect agent)
+
+"Should we prioritize this feature for the next sprint?"
+(Triggers Product Owner agent)
+
+"How can we improve our development process?"
+(Triggers Scrum Master agent)
+
+"How should we implement this authentication flow?"
+(Triggers Developer agent)
+
+"What testing approach should we use for the payment system?"
+(Triggers QA agent)
+```
+
+### 2. Use Direct Commands for Specific Tasks
+
+For more direct control, use these commands:
+
+```
+UMB - Update Memory Bank with current changes
+SMB - Summarize Memory Bank contents
+CMB - Check Memory Bank for consistency issues
+INIT - Initialize project with memory bank structure
+DOC - Generate documentation for current context
+PLAN - Create implementation plan for current task
+```
+
+### 3. Use Workflow Slash Commands
+
+Access specific workflows with slash commands:
+
+```
+/memory-structure - Access the three-layer memory structure workflow
+/task-lifecycle - Access the task lifecycle events workflow
+/error-handling - Access the error handling framework workflow
+/memory-consistency - Access the memory consistency verification workflow
+/session-intelligence - Access the session intelligence workflow
+/smart-mcp-integration - Access the smart MCP integration framework
+```
+
+>>>>>>> 12731ef5656d311d7de44a2b8eafe964e329af7c
 ---
 
 ## Advanced Functionalities & Best Practices
@@ -187,6 +246,7 @@ Beyond the core memory bank and agent system, this template supports a range of 
 
 | Example User Input                                             | Triggered Agent/Workflow      |
 |---------------------------------------------------------------|-------------------------------|
+<<<<<<< HEAD
 | “How should we prioritize the upcoming features?”              | Product Owner (PO)            |
 | “What’s the best way to structure our database schema?”        | Architect                     |
 | “What testing approach should we use for the payment system?”  | QA                            |
@@ -395,3 +455,16 @@ The Windsurf Project Template is organized into a clear directory structure:
 ├── .windsurfrules         # Project intelligence
 └── README.md              # Project documentation
 ```
+
+## Example Agent Triggers
+
+| User Query                                                | Triggered Agent              |
+|-----------------------------------------------------------|------------------------------|  
+| "How should we prioritize the upcoming features?"          | Product Owner (PO)           |
+| "What's the best way to structure our database schema?"    | Architect                    |
+| "What testing approach should we use for the payment system?" | QA                         |
+| "Can you clarify the business value of this feature?"      | Business Analyst (BA)        |
+| "What are the security risks for this release?"            | Security Architect or QA     |
+| "What is the current project status?"                      | Project Manager (PM)         |
+| "How do we deploy to production?"                          | DevOps/Deployment Agent      |
+| "What documentation is available for this API?"            | Docs Agent                   |

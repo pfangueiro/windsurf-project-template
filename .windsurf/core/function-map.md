@@ -49,30 +49,18 @@ This file defines the function map that serves as a software layer within the mo
 - **reviewToolUsage**: Examine how the tool was being used
 - **adjustParameters**: Modify parameters to address failure causes
 - **executeRetry**: Attempt the operation again with adjusted parameters
-- **checkRetrySuccess**: Verify if retry was successful
-- **incrementRetryCount**: Increase the retry counter
-- **checkRetryLimit**: Check if maximum retry attempts reached
-- **escalateToUser**: Prepare detailed context for user intervention
-- **documentFailure**: Record failure details in error logs
-- **alertUser**: Notify user of unresolved issue
+- **escalateFailure**: Report the failure to a higher system level
+- **documentRecoveryStrategy**: Record successful recovery approach
+- **trackErrorPatterns**: Identify recurring error patterns
+- **implementErrorPrevention**: Add safeguards to prevent similar errors
 
-## Evaluation Functions
+## Memory Consistency Functions
 
-- **documentObjectiveSummary**: Record clear objectives for evaluation
-- **calculatePerformanceScore**: Compute numerical score based on performance standards
-- **evaluateAgainstTargetScore**: Compare actual score against required threshold
-- **analyzePerformanceGap**: Identify specific areas causing performance shortfall
-- **identifyImprovementOpportunities**: Determine specific optimization opportunities
-- **implementOptimizations**: Apply targeted improvements to solution
-- **recalculatePerformanceScore**: Recompute score after optimizations
-- **checkTargetAchieved**: Verify if performance target has been met
-- **iterateOptimizationCycle**: Repeat optimization process
-- **recordSuccessPatterns**: Document successful optimization patterns
-- **documentLessonsLearned**: Record insights gained during optimization
-
-## Self-Critique Functions
-
-- **executeCreatorPhase**: Generate comprehensive initial solution
-- **executeCriticPhase**: Identify weaknesses, edge cases, and assumptions
-- **executeDefenderPhase**: Address criticisms systematically
-- **executeJudgePhase**: Compare original and improved versions
+- **verifyChecksums**: Verify file integrity using checksums
+- **validateHierarchy**: Ensure proper relationships between memory layers
+- **validateCrossReferences**: Check that all references between files are valid
+- **detectConflicts**: Identify potential conflicts or inconsistencies
+- **calculateDrift**: Measure drift between memory files and actual code
+- **restoreFromBackup**: Restore memory files from backup when needed
+- **rebuildFromLogs**: Reconstruct memory files from task logs and code comments
+- **consolidateMemory**: Perform periodic consolidation and cleanup
