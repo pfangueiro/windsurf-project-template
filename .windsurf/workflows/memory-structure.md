@@ -23,24 +23,21 @@ memory_structure:
       - "At regular intervals during long sessions"
   
   short_term_memory:
-    directory: "task-logs/"
+    files: ["activeContext.md", "progress.md", "decisionLog.md"]
     purpose: "Recent activities and decisions"
-    retention_period: "14 days"
-    file_naming: "YYYY-MM-DD_task_[id].md"
+    update_frequency: "when task status changes"
     contents:
-      - "Task objectives"
-      - "Implementation details"
-      - "Decisions made"
-      - "Challenges encountered"
-      - "Solutions applied"
-      - "Performance metrics"
-    cleanup_policy:
-      automatic_archiving: true
-      retention_days: 14
-      archive_location: "task-logs/archive/"
+      - "Current focus"
+      - "Recent changes"
+      - "Next steps"
+      - "Active decisions"
+      - "Project status"
+      - "Decision records"
+    consistency_checks:
+      require_references_to_long_term: true
   
   long_term_memory:
-    files: ["projectbrief.md", "productContext.md", "systemPatterns.md", "techContext.md", "progress.md"]
+    files: ["projectbrief.md", "productContext.md", "systemPatterns.md", "techContext.md"]
     purpose: "Core project knowledge and architectural decisions"
     update_frequency: "when significant changes occur"
     consistency_checks:
@@ -59,7 +56,7 @@ memory_structure:
 The three-layer memory structure provides optimal context for MCP operations:
 
 1. **Working Memory** (activeContext.md) informs immediate tool selection
-2. **Short-Term Memory** (task-logs) provides recent patterns for similar operations
-3. **Long-Term Memory** (core files) ensures consistency with project architecture
+2. **Short-Term Memory** (activeContext.md, progress.md, decisionLog.md) provides recent context and decisions
+3. **Long-Term Memory** (foundation and context layer files) ensures consistency with project architecture
 
 This structure ensures the MCP intelligence has access to the right level of context for each operation, preventing both context overload and insufficiency.

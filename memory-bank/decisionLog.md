@@ -1,50 +1,73 @@
 # Decision Log
 
-This document records significant architectural decisions, technical choices, and implementation strategies. Each entry includes the decision made, rationale, implications, and alternatives considered.
+## Purpose
+This document tracks significant project decisions, their rationale, alternatives considered, and current status. It serves as a historical record and reference for understanding why certain approaches were chosen.
 
-## Decision Format
-
-Each decision should follow this format:
-
-```
-## [YYYY-MM-DD HH:MM:SS] - [Summary of Decision]
-
-### Context
-Brief explanation of the situation that necessitated this decision.
-
-### Decision
-Clear statement of what was decided.
-
-### Rationale
-Reasons that led to this decision.
-
-### Implications
-Short-term and long-term effects of this decision.
-
-### Alternatives Considered
-Other options that were evaluated and why they were not selected.
-```
+## Decision Record Format
+Each decision follows this format:
+- **ID**: Unique identifier (YYYY-MM-DD-##)
+- **Title**: Brief descriptive title
+- **Status**: Decided, Implemented, Superseded, or Revisiting
+- **Context**: Background and drivers for the decision
+- **Decision**: The specific choice made
+- **Rationale**: Reasoning behind the decision
+- **Alternatives**: Other options considered
+- **Consequences**: Expected outcomes (positive and negative)
+- **Related Decisions**: Cross-references to related decisions
 
 ## Decisions
 
-### [2025-05-28 16:34:10] - Implement Advanced Memory System
+### 2025-06-02-01: Memory Bank Hierarchical Structure
 
-#### Context
-Review of memory system options and evaluation of different approaches to maintain project context and enhance agent performance.
+**Status**: Implemented
 
-#### Decision
-Implement the comprehensive memory system with workflow diagrams, event handlers, function maps, and advanced error recovery mechanisms.
+**Context**:  
+The project requires a robust way to maintain context across sessions and support multi-agent collaboration. Various documentation approaches were considered.
 
-#### Rationale
-The advanced system provides better structure, more robust error handling, clearer organization, and sophisticated self-improvement mechanisms compared to alternatives.
+**Decision**:  
+Implement a hierarchical memory bank with `projectbrief.md` as the foundation document, with clear dependencies between files.
 
-#### Implications
-- Enhanced context retention across sessions
-- More resilient error handling and recovery
-- Better documentation and project organization
-- Systematic approach to implementation and evaluation
+**Rationale**:  
+A hierarchical structure provides clear relationships between documents, ensures consistent updates, and makes it easier to navigate and understand the project context.
 
-#### Alternatives Considered
-- Simpler memory bank structure with basic file organization
-- No structured workflows or event handlers
-- Manual error handling rather than systematic recovery
+**Alternatives**:
+- Flat file structure (rejected due to lack of clear relationships)
+- Database storage (rejected for complexity and reduced portability)
+- Wiki-based system (rejected for dependency management challenges)
+
+**Consequences**:
+- Positive: Clear documentation flow, consistent updates, better context preservation
+- Negative: Requires discipline to maintain hierarchical updates
+- Negative: Slightly more complex than flat structures
+
+**Related Decisions**:
+- 2025-06-02-02: Memory Bank Cleaning and Recreation
+
+### 2025-06-02-02: Memory Bank Cleaning and Recreation
+
+**Status**: Implemented
+
+**Context**:  
+Memory bank needed to be refreshed to ensure consistency and clean state.
+
+**Decision**:  
+Perform full cleaning and recreation of the memory bank system while preserving the hierarchical structure.
+
+**Rationale**:  
+Creating a clean memory bank ensures no inconsistencies or outdated information remains, while providing an opportunity to verify the integrity of the memory system.
+
+**Alternatives**:
+- Incremental updates (rejected due to potential for lingering inconsistencies)
+- Partial recreation (rejected for potential hierarchy breaks)
+
+**Consequences**:
+- Positive: Clean, consistent memory system
+- Positive: Verified hierarchical structure
+- Negative: Required effort to recreate all documents
+- Negative: Potential for information loss (mitigated by backup)
+
+**Related Decisions**:
+- 2025-06-02-01: Memory Bank Hierarchical Structure
+
+---
+*Note: This document serves as a historical record of project decisions and should be referenced when making future decisions.*

@@ -12,12 +12,16 @@ A minimal, robust, and extensible template for AI-assisted software development 
 ## Core Functionalities
 
 ### Hierarchical Memory Bank System
-- Three-layer memory structure (working, short-term, long-term)
-- Six core files persist context, decisions, and progress
+- Three-layer memory structure:
+  - **Foundation layer**: projectbrief.md (source of truth)
+  - **Context layer**: productContext.md, systemPatterns.md, techContext.md
+  - **Current state layer**: activeContext.md, progress.md, decisionLog.md
 - Enables audit trails and reverse traceability from code to requirements
+- Project intelligence captured in `.windsurfrules`
 
 ### Smart Workflows System
-- **Memory Structure**: Three-layer approach for optimal context management
+- **Memory Structure**: Three-layer hierarchical approach (foundation → context → current state)
+- **Memory Update**: Comprehensive process ensuring ALL files are reviewed when triggered
 - **Task Lifecycle**: Structured events for workflow tracking and automation
 - **Error Handling**: Framework for detection, logging, and recovery
 - **Memory Consistency**: Verification system for memory bank reliability
@@ -45,6 +49,7 @@ A minimal, robust, and extensible template for AI-assisted software development 
 ## Workflow Triggers & Example Usage
 
 ### Natural Language Triggers
+- "update memory bank" → Triggers comprehensive review of ALL memory files
 - "update memory with [topic]" → Updates memory bank with specified topic
 - "what's our current focus" → Retrieves context from activeContext.md
 - "how does [component] work" → Retrieves information from systemPatterns.md
@@ -72,9 +77,12 @@ A minimal, robust, and extensible template for AI-assisted software development 
 ## How the System Works
 
 1. **Project Initialization**
-   - Checks for memory bank directory structure
-   - Creates core files if they don't exist
-   - Sets up three-layer memory structure
+   - Checks for `.windsurf/` and memory-bank directory structures
+   - Creates core files in hierarchical layers if they don't exist:
+     - Foundation: projectbrief.md
+     - Context: productContext.md, systemPatterns.md, techContext.md
+     - Current State: activeContext.md, progress.md, decisionLog.md
+   - Creates `.windsurfrules` to capture project intelligence
 
 2. **Session Start**
    - Progressive context loading based on relevance

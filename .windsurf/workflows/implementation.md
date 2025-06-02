@@ -32,7 +32,7 @@ flowchart TD
    // Cascade documents the planned implementation approach
 
 4. **Update Plans**: Record implementation plans in appropriate structure
-   // Cascade updates .augment/plans/ with implementation details
+   // Cascade updates .windsurf/plans/ with implementation details
 
 5. **Execute Implementation**: Perform the actual coding work
    // Cascade implements the required functionality

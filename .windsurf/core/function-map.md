@@ -11,10 +11,10 @@ This file defines the function map that serves as a software layer within the mo
 - **createActiveContext**: Document current work focus and next steps
 - **createProgressDoc**: Document what works and what's left to build
 - **checkMemoryBankExists**: Verify if memory bank directory structure exists
-- **createMemoryBankDirectory**: Create the .augment directory structure
+- **createMemoryBankDirectory**: Create the memory-bank directory structure
 - **scaffoldMemoryBankStructure**: Create all required subdirectories
 - **populateMemoryBankFiles**: Initialize core memory files with available information
-- **readMemoryBank**: Load all memory layers from .augment/core/
+- **readMemoryBank**: Load all memory layers from memory-bank/
 
 ## Documentation Functions
 
@@ -37,7 +37,7 @@ This file defines the function map that serves as a software layer within the mo
 - **executeTask**: Execute a specific implementation task
 - **checkMemoryBank**: Review memory bank for relevant context
 - **updateDocumentation**: Update documentation with new information
-- **updatePlans**: Update .augment/plans/ with current implementation details
+- **updatePlans**: Update .windsurf/plans/ with current implementation details
 - **executeImplementation**: Execute the actual implementation work
 - **enforceCodeQualityStandards**: Maintain high code quality
 
